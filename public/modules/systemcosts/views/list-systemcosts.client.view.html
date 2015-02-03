@@ -1,0 +1,38 @@
+<section data-ng-controller="SystemcostsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Systemcosts</h1>
+            <div class="row">
+        <div class="col-xs-12 col-md-8">
+            <div class="input-group input-group-md">
+                <input type="text" placeholder="Search......" class="form-control" ng-model="searchSystemCost" style="height: 38px;">
+                <span class="input-group-btn">
+                    <button class="btn btn-danger btn-show" type"button"> 
+<i class="glyphicon glyphicon-search"></i> 
+                        </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="systemcost in systemcosts | filter:searchSystemCost" data-ng-href="#!/systemcosts/{{systemcost._id}}" class="list-group-item">
+           <small class="list-group-item-text">
+                Posted on
+                <span data-ng-bind="systemcost.created | date:'medium'"></span>
+                by
+                <span data-ng-bind="systemcost.user.displayName"></span>
+            </small>
+            <div class="row">
+                <div class="col-md-3">
+                    <h4 class="list-group-item-heading" data-ng-bind="systemcost.input_item"></h4>
+                </div>
+                <div class="col-md-1">
+                    {{systemcost.total_percentage * 100}} %
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!systemcosts.$resolved || systemcosts.length">
+    	No Systemcosts yet, why don't you <a href="/#!/systemcosts/create">create one</a>?
+    </div>
+</section>

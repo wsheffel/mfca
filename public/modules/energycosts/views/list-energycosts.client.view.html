@@ -1,0 +1,41 @@
+<section data-ng-controller="EnergycostsController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Energycosts</h1>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-8">
+            <div class="input-group input-group-md">
+                <input type="text" placeholder="Search......" class="form-control" ng-model="searchCost" style="height: 38px;">
+                <span class="input-group-btn">
+                    <button class="btn btn-danger btn-show" type"button"> 
+<i class="glyphicon glyphicon-search"></i> 
+                        </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="list-group">
+        <a data-ng-repeat="energycost in energycosts | filter:searchCost" data-ng-href="#!/energycosts/{{energycost._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="energycost.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="energycost.user.displayName"></span>
+			</small>
+			<div class="row">
+                <div class="col-md-3">
+                    <h4 class="list-group-item-heading" data-ng-bind="energycost.input_item"></h4>
+                </div>
+                <div class="col-md-1">
+                    {{energycost.total_percentage * 100}} %
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="alert alert-warning text-center" data-ng-hide="!energycosts.$resolved || energycosts.length">
+    	No Energycosts yet, why don't you <a href="/#!/energycosts/create">create one</a>?
+    </div>
+</section>

@@ -1,0 +1,40 @@
+<section data-ng-controller="TypeofmaterialsController" data-ng-init="find()">
+    <div class="page-header">
+        <h2><strong>List</strong> of Material</h2><p><i>input / output
+    </i></p>
+    <div class="row">
+        <div class="col-xs-12 col-md-8">
+            <div class="input-group input-group-md">
+                <input type="text" placeholder="Search......" class="form-control" ng-model="searchType" style="height: 38px;">
+                <span class="input-group-btn">
+                    <button class="btn btn-danger btn-show" type"button"> 
+<i class="glyphicon glyphicon-search"></i> 
+                        </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    </div>
+    
+    <div class="list-group">
+        <a data-ng-repeat="typeofmaterial in typeofmaterials | filter:searchType" data-ng-href="#!/typeofmaterials/{{typeofmaterial._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="typeofmaterial.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="typeofmaterial.user.displayName"></span>
+			</small>
+            <div class="row">
+                <div class="col-md-3">
+                    <h4 class="list-group-item-heading" data-ng-bind="typeofmaterial.input_item"></h4>
+                </div>
+                <div class="col-md-1">
+                    {{typeofmaterial.total_percentage * 100}} %
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!typeofmaterials.$resolved || typeofmaterials.length">
+    	No Typeofmaterials yet, why don't you <a href="/#!/typeofmaterials/create">create one</a>?
+    </div>
+</section>

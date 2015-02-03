@@ -1,0 +1,187 @@
+<section data-ng-controller="MateriallossesController">
+    <div class="page-header">
+        <h2><strong>New</strong> Material Losses</h2><p><i>input / output
+    </i></p>
+    </div>
+   
+    <div class="col-md-12 login-page-bg">            
+        <div class="row" style=" margin-top: -18px;margin-left: -18px;">
+            <div class="col-md-6 login-page-toggle{{isInput}}" ng-click="toggleInOut(true)">
+                <div clsss="row">
+                    <div class="col-md-2">
+                        <span class="h4-circle{{isInput}}">1</span>
+                    </div>
+                    <div class="col-md-10 pull-left">
+                        <h3 class="text-default"> Material Flow Input </h3>
+                    </div>
+                </div>                
+            </div>
+            <div class="col-md-6 login-page-toggle{{isOutput}}" ng-click="toggleInOut(false)">
+                 <div clsss="row">
+                    <div class="col-md-2">
+                        <span class="h4-circle{{isOutput}}">2</span>
+                    </div>
+                    <div class="col-md-10 pull-left">
+                        <h3 class="text-default"> Material Flow Output </h3>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 bg-success" style="margin-left: -3px;width: 100.6%;" >
+                <div data-ng-show="success" class="text-success">
+                   <h5> <strong data-ng-bind="success"></strong>
+                    <i class="glyphicon glyphicon-remove text-success pull-right" ng-click="closeAlert()"></i></h5>
+                </div>  
+            </div>
+            <div class="col-md-12 bg-danger" style="margin-left: -3px;width: 100.6%;" >
+                <div data-ng-show="error" class="text-danger">
+                   <h5> <strong data-ng-bind="error"></strong>
+                    <i class="glyphicon glyphicon-remove text-danger pull-right" ng-click="closeAlert()"></i></h5>
+                </div>  
+            </div>
+        </div>  
+        
+        <div ng-show="isCollapsedIn">
+            <form class="form-inline forgotPwd" name="list_of_materialsForm" data-ng-submit="addItem()" novalidate>            
+                <fieldset>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label text-muted" for="item">New Item</label>
+                                <div class="controls">
+                                    <input type="text" data-ng-model="input_item" id="item" class="form-control " placeholder="item" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="control-label text-muted" style="margin-bottom: 12px;" for="input_price">Material Price</label>
+                                <div class="controls">
+                                    <p class="control-label text-muted text-center"  data-ng-model="input_price" for="input_price" >{{input_price = input_cost * input_quantity | currency:"$":0}}  </p>                        
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label text-muted" for="input_quantity">Quantity</label>
+                                <div class="controls">
+                                    <input type="text" data-ng-model="input_quantity" id="input_quantity" class="form-control" placeholder="quantity" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label text-muted" for="input_cost">Cost</label>
+                                <div class="controls">
+                                    <input type="text" data-ng-model="input_cost" id="input_cost" class="form-control" placeholder="cost" required>
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-left: 23px;margin-top: 24px;">
+                                <div class="form-group">
+                                    <input type="submit" value="Add" ng-click="focusInput=true" class="btn btn-primary btn-show pull-left btn-sm">
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </fieldset>
+            </form>
+            <h4 style="text-decoration:underline"><strong>Input</strong> Items</h4>
+            <div class="table-responsive">
+                <table data-sortable class="table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Item</th>
+                            <th>Material Unit Price</th>
+                            <th>Quantity</th>
+                            <th>Cost</th>
+                            <th data-sortable="false">Option</th>
+                        </tr>
+                    </thead>                    
+                    <tbody>
+                        <tr data-ng-repeat="list_of_material in list_of_materials" data-ng-href="#!/typeofmaterials/{{list_of_material._id}}">
+                            <td>{{$index+1}}</td>
+                            <td><strong>{{list_of_material.input_item}}</strong></td>
+                            <td>{{list_of_material.input_price  | currency:"$":0}}</td>
+                            <td>{{list_of_material.input_quantity}}</td>
+                            <td>{{list_of_material.input_cost | currency:"$":0}}</td>
+                            <td>
+                                <div class="btn-group btn-group-xs">
+                                    
+                                    <a data-toggle="tooltip" title="Edit" class="btn btn-warning btn-show"><i class="glyphicon glyphicon-edit"></i></a>
+                                    <a data-toggle="tooltip" title="Delete" class="btn btn-danger btn-show"><i class="glyphicon glyphicon-remove"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <thead style="background-color: #D7D7D7;color: #050505;">
+                        <tr>
+                            <th colspan="3">Material quantity and cost subtotal </th>
+                            <th>{{total_inputQuantity}}</th>
+                            <th>{{total_input_cost}}</th>
+                            <th data-sortable="false">  </th>
+                        </tr>
+                    </thead> 
+                </table>
+            </div>
+        </div>
+        <div ng-show="isCollapsedOut">
+            <h4 style="text-decoration:underline"><strong>Output</strong> Items</h4>
+            <div class="table-responsive">
+                <form class="form-inline forgotPwd" data-ng-submit="create()" novalidate>
+                    <table data-sortable class="table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Item</th>
+                                <th>Product Quantity</th>
+                                <th>Product Cost</th>
+                                <th>Loss Quantity</th>
+                                <th>Loss cost</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>                    
+                        <tbody>
+                            <tr data-ng-repeat="list_of_material in list_of_materials" data-ng-href="#!/typeofmaterials/{{list_of_material._id}}">
+                                <td>{{$index+1}}</td>
+                                <td><strong>{{list_of_material.input_item}}</strong></td>
+                                <td> <div class="form-group">
+                                        <div class="controls">
+                                            <input type="text" data-ng-model="list_of_material.output_pamt_quantity" id="output_pamt_quantity" class="form-control" placeholder="Product Quantity" ng-blur="loadItems()" required>
+                                        </div>
+                                    </div></td>
+                                <td>{{list_of_material.output_pamt_cost = list_of_material.output_pamt_quantity * list_of_material.input_price | currency:"$":0}}</td>
+                                <td> <div class="form-group">
+                                        <div class="controls">
+                                            <input type="text" data-ng-model="list_of_material.output_lamt_quantity" id="output_lamt_quantity"  class="form-control" placeholder="Loss Quantity" ng-blur="loadItems()" required>
+                                        </div>
+                                    </div></td>
+                                <td>{{list_of_material.output_lamt_cost = list_of_material.output_lamt_quantity * list_of_material.input_price | currency:"$":0}}</td>
+                                 <td><h5 class="text-success"><strong>{{list_of_material.result_per = (list_of_material.output_lamt_quantity / list_of_material.input_quantity | number:2) *100 | number:0}} %</strong></h5></td>
+                            </tr>
+                        </tbody>
+
+                    <thead style="background-color: #D7D7D7;color: #050505;">
+                        <tr>
+                            <th colspan="2">Quanitity for waste management and its Cost   </th>
+                            <th>{{total_ProdQuantity}}</th>
+                            <th>{{total_ProdCost | currency:"$":0}}</th>
+                            <th>{{total_LossQuantity}}</th>
+                            <th>{{total_LossCost | currency:"$":0}}</th>
+                            <th><strong> {{(total_percentage | number:2) * 100 | number:0}}%</strong></th>
+                        </tr>
+                    </thead> 
+                    </table>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-show pull-left btn-md">
+                            <i class="glyphicon glyphicon-floppy-save"></i> Submit
+                        </button>
+                        <button type="submit" class="btn btn-danger btn-show pull-left btn-md">
+                            <i class="glyphicon glyphicon-trash"></i> Cancel
+                        </button>
+                            </div>
+                </form>
+            </div>
+        </div>       
+</section>
