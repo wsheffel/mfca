@@ -149,7 +149,7 @@ module.exports = function(db) {
 		var certificate = fs.readFileSync('./config/sslcerts/cert.pem', 'utf8');
 
 		// Create HTTPS Server
-		var httpsServer = https.createServer({
+		var httpsServer = http.createServer({
 			key: privateKey,
 			cert: certificate
 		}, app);
