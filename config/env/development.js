@@ -1,7 +1,8 @@
 'use strict';
 
 module.exports = {
-	db: 'mongodb://localhost/myapp2-dev',
+	/*db: 'mongodb://localhost/myapp2-dev',*/
+	db: 'mongodb://mfcauser:123456@ds039441.mongolab.com:39441/mfcadatabase',
 	app: {
 		title: 'MFCA - Application'
 	},
