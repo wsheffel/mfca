@@ -63,7 +63,6 @@
 	<!--Application JavaScript Files-->
 	{% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %} 
 
-{{request.referrer}}
 	{% if process.env.NODE_ENV === 'development' %}
 	<!--Livereload script rendered -->
 	<script type="text/javascript" src="{{request.protocol}}://{{request.hostname}}:35729/livereload.js"></script>
