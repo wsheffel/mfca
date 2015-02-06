@@ -79,7 +79,7 @@ angular.module('core').service('Menus', [
 		};
 
 		// Add menu item object
-		this.addMenuItem = function(menuId, menuItemTitle, menuItemURL, menuItemType, menuItemUIRoute, isPublic, roles, position) {
+		this.addMenuItem = function(menuId, order, menuItemTitle, menuItemURL, menuItemType, menuItemUIRoute, isPublic, roles, position) {
 			// Validate that the menu exists
 			this.validateMenuExistance(menuId);
 			console.log(angular.toJson(menuItemType));
@@ -94,9 +94,11 @@ angular.module('core').service('Menus', [
 				roles: ((roles === null || typeof roles === 'undefined') ? this.menus[menuId].roles : roles),
 				position: position || 0,
 				items: [],
+				order: order,
 				shouldRender: shouldRender
 			});
-
+			// Sortby top menu items			
+			this.menus.topbar.items = _.sortBy(this.menus.topbar.items, 'order');		
 			// Return the menu object
 			return this.menus[menuId];
 		};

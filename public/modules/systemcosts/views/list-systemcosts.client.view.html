@@ -27,7 +27,7 @@
                     <h4 class="list-group-item-heading" data-ng-bind="systemcost.input_item"></h4>
                 </div>
                 <div class="col-md-1">
-                    {{systemcost.total_percentage * 100}} %
+                    {{systemcost.total_percentage * 100  | number:0}} %
                 </div>
             </div>
         </a>

@@ -3,21 +3,13 @@
 		<h1 data-ng-bind="materialloss.name"></h1>
 	</div>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == materialloss.user._id))">
-		<a class="btn btn-primary" href="/#!/materiallosses/{{materialloss._id}}/edit">
-			<i class="glyphicon glyphicon-edit"></i>
+		<a class="btn btn-primary btn-show" href="/#!/materiallosses">
+			<i class="glyphicon glyphicon-list"></i>
 		</a>
-		<a class="btn btn-primary" data-ng-click="remove();">
+		<a class="btn btn-primary btn-show" data-ng-click="remove();">
 			<i class="glyphicon glyphicon-trash"></i>
 		</a>
 	</div>
-	<small>
-		<em class="text-muted">
-			Posted on
-			<span data-ng-bind="materialloss.created | date:'mediumDate'"></span>
-			by
-			<span data-ng-bind="materialloss.user.displayName"></span>
-		</em>
-	</small>
 	<small>
 		<em class="text-muted" style="color:#fff">
 			Posted on
@@ -29,11 +21,11 @@
 	        <div class="row" style=" margin-top: -18px;margin-left: -18px;">
 	            <div class="col-md-12 login-page-toggle{{isInput}}">
 	                <div clsss="row">
-	                    <div class="col-md-2">
+	                    <div class="col-md-1">
 	                        <span class="h4-circle{{isInput}}">1</span>
 	                    </div>
-	                    <div class="col-md-10 pull-left">
-	                        <h3 class="text-default"> Material Flow Summary </h3>
+	                    <div class="col-md-11 pull-left">
+	                        <h3 class="text-default">Losses Summary </h3>
 	                    </div>
 	                </div>                
 	            </div>

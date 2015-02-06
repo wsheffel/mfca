@@ -12,7 +12,7 @@
                         <span class="h4-circle{{isInput}}">1</span>
                     </div>
                     <div class="col-md-10 pull-left">
-                        <h3 class="text-default"> Material Flow Input </h3>
+                        <h3 class="text-default"> Input </h3>
                     </div>
                 </div>                
             </div>
@@ -22,7 +22,7 @@
                         <span class="h4-circle{{isOutput}}">2</span>
                     </div>
                     <div class="col-md-10 pull-left">
-                        <h3 class="text-default"> Material Flow Output </h3>
+                        <h3 class="text-default"> Output </h3>
                     </div>
                 </div> 
             </div>
@@ -54,11 +54,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label text-muted" style="margin-bottom: 12px;" for="input_price">Material Price</label>
-                                <div class="controls">
-                                    <p class="control-label text-muted text-center"  data-ng-model="input_price" for="input_price" >{{input_price = input_cost * input_quantity | currency:"$":0}}  </p>                        
+                                <label class="control-label text-muted"  for="input_price">Material Price</label>
+                                 <div class="form-group">
+                                    <input type="text" data-ng-model="input_price" id="input_price" class="form-control" placeholder="input price" required>
                                 </div>
                             </div>
                         </div>
@@ -70,19 +70,22 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <div class="form-group">
-                                <label class="control-label text-muted" for="input_cost">Cost</label>
+                                <label class="control-label text-muted" style="margin-bottom: 12px;" for="input_cost">Cost</label>
                                 <div class="controls">
-                                    <input type="text" data-ng-model="input_cost" id="input_cost" class="form-control" placeholder="cost" required>
+                                    <p class="control-label text-muted text-center"  data-ng-model="input_cost" for="input_cost" >{{input_cost = input_price * input_quantity | currency:"$":0}}  </p>    
                                 </div>
                             </div>
+                           
+                        </div> 
+                        <div class="col-md-1">
                             <div class="form-group" style="margin-left: 23px;margin-top: 24px;">
                                 <div class="form-group">
                                     <input type="submit" value="Add" ng-click="focusInput=true" class="btn btn-primary btn-show pull-left btn-sm">
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </fieldset>
             </form>

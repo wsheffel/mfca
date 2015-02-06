@@ -148,7 +148,7 @@ angular.module('systemcosts').controller('SystemcostsController', ['$scope', '$s
 		$scope.addItem = function(){
 			if(!_.isEmpty($scope.input_item) && !_.isUndefined($scope.input_item) && 
 				!_.isEmpty($scope.input_quantity) && !_.isUndefined($scope.input_quantity) && 
-				!_.isEmpty($scope.input_cost) && !_.isUndefined($scope.input_cost)){
+				!_.isEmpty($scope.input_price) && !_.isUndefined($scope.input_price)){
 				$scope.new_material_item = {
 					input_item: $scope.input_item,
 					input_price: $scope.input_price,

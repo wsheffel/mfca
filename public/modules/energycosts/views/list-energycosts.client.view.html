@@ -29,7 +29,7 @@
                     <h4 class="list-group-item-heading" data-ng-bind="energycost.input_item"></h4>
                 </div>
                 <div class="col-md-1">
-                    {{energycost.total_percentage * 100}} %
+                    {{energycost.total_percentage * 100  | number:0}} %
                 </div>
             </div>
         </a>
