@@ -23,7 +23,7 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController', ['$sco
 		$scope.total_ProdCost = 0;
 		$scope.total_LossQuantity=0;
 		$scope.total_LossCost = 0;
-		$scope.total_percentage = 0;
+		$scope.total_percentage = 0; 
 
 		$scope.init = function(){
 			$scope.list_of_materials = [];
