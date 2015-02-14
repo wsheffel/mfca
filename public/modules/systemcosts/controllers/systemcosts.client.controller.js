@@ -26,6 +26,10 @@ angular.module('systemcosts').controller('SystemcostsController',
 		$scope.total_LossQuantity=0;
 		$scope.total_LossCost = 0;
 		$scope.total_percentage = 0;
+		
+		// newly added
+		$scope.isEditForm = false;
+		$scope.currentItem = {};
 
 		$scope.init = function(){
 			$scope.list_of_materials = [];
@@ -109,7 +113,7 @@ angular.module('systemcosts').controller('SystemcostsController',
 			//Total input quantity
 			var total_arrinputQuantity = _.flatten($scope.list_of_materials, 'input_quantity');
 			$scope.sumItems(total_arrinputQuantity);
-			console.log($scope.total_result);
+			//console.log($scope.total_result);
 			$scope.total_inputQuantity = $scope.total_result;
 			
 			//Total input cost
@@ -276,6 +280,28 @@ angular.module('systemcosts').controller('SystemcostsController',
 			$scope.systemcost = Systemcosts.get({ 
 				systemcostId: $stateParams.systemcostId
 			});
+		};
+		
+		// added by tech-works
+		$scope.editSystemCost = function(currentItem) {
+			$scope.currentItem = {};
+			$scope.currentItem = _.cloneDeep(currentItem);
+			$scope.isEditForm = true;
+		};
+		
+		$scope.updateItem = function(){
+			var updatedItemIndex = _.findIndex($scope.list_of_materials, function(item) 
+					{ return _.isEqual(item.input_item, $scope.currentItem.input_item); });
+			_.assign($scope.list_of_materials[updatedItemIndex], $scope.currentItem);
+			$scope.currentItem = {};
+			$scope.isEditForm = false;
+			$scope.loadItems();
+		};
+		
+		$scope.deleteSystemCost = function(currentItem) {
+			_.remove($scope.list_of_materials, function(item) 
+					{ return _.isEqual(item.input_item, currentItem.input_item); });
+			$scope.loadItems();
 		};
 
 		$scope.init();
