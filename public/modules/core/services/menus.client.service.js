@@ -1,9 +1,9 @@
 'use strict';
 
 //Menu service used for managing  menus
-angular.module('core').service('Menus', [
+angular.module('core').service('Menus', ['_',
 
-	function() {
+	function(_) {
 		// Define a set of default roles
 		this.defaultRoles = ['*'];
 
@@ -165,4 +165,6 @@ angular.module('core').service('Menus', [
 		//Adding the topbar menu
 		this.addMenu('topbar');
 	}
-]);
+]).factory('_', function() {
+	  return window._; // assumes lodash has already been loaded on the page
+});

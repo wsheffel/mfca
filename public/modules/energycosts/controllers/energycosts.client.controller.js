@@ -1,8 +1,9 @@
 'use strict';
 
 // Energycosts controller
-angular.module('energycosts').controller('EnergycostsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Energycosts',
-	function($scope, $stateParams, $location, Authentication, Energycosts) {
+angular.module('energycosts').controller('EnergycostsController', 
+		['$scope', '$stateParams', '$location', 'Authentication', 'Energycosts', '_',
+	function($scope, $stateParams, $location, Authentication, Energycosts, _) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsedIn = true;
 		$scope.isInput='-active';
@@ -11,12 +12,12 @@ angular.module('energycosts').controller('EnergycostsController', ['$scope', '$s
 		$scope.input_price = 0;
 		$scope.input_quantity = 0;
 		$scope.input_cost = 0;
-		$scope.output_pamt_quantity;
-		$scope.output_pamt_cost;
-		$scope.output_lamt_quantity;
-		$scope.output_lamt_cost;
+		$scope.output_pamt_quantity = 0;
+		$scope.output_pamt_cost = 0;
+		$scope.output_lamt_quantity = 0;
+		$scope.output_lamt_cost = 0;
 		$scope.result_per=0;
-		$scope.total_inputQuantity = 0;;
+		$scope.total_inputQuantity = 0;
 		$scope.total_result = 0;
 		$scope.total_input_cost = 0;
 		$scope.total_ProdQuantity=0;
