@@ -1,0 +1,81 @@
+<section data-ng-controller="IndustryController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1>Edit Company</h1>
+	</div>
+	<div class="col-xs-offset-1 col-xs-10 col-md-offset-4 col-md-4 login-page-bg">
+		<form name="industryForm" class="form-horizontal forgotPwd" data-ng-submit="update(industryForm.$valid)" novalidate>
+			<fieldset>				
+				<!-- <div class="form-group" ng-class="{ 'has-error' : submitted && articleForm.list_of_industries.$invalid}">
+					<label class="control-label" for="list_of_industries">List of Industries</label>
+					<div class="controls">
+						<input name="list_of_industries" type="text" data-ng-model="article.list_of_industries" id="list_of_industries" class="form-control" placeholder="list of industries" required>
+					</div>
+					<div ng-show="submitted && articleForm.list_of_industries.$invalid" class="help-block">
+						<p ng-show="articleForm.list_of_industries.$error.required" class="text-danger">List of Industries is required</p>
+					</div>
+				</div> -->
+				<div class="form-group" ng-class="{ 'has-error' : submitted && industryForm.industry_name.$invalid}">
+					<label class="control-label" for="industryname">Industry Name</label>
+					<div class="controls">
+						<input name="industryname" type="text" data-ng-model="industry.industry_name" id="industryname" class="form-control" placeholder="industry name" required>
+					</div>
+					<div ng-show="submitted && industryForm.industry_name.$invalid" class="help-block">
+						<p ng-show="industryForm.industry_name.$error.required" class="text-danger">Industry Name is required</p>
+					</div>
+				</div>
+				<!-- <div class="form-group" ng-class="{ 'has-error' : submitted && articleForm.address.$invalid}">
+					<label class="control-label" for="address">Address</label>
+					<div class="controls">
+						<input name="address" type="text" data-ng-model="article.address" id="companyname" class="form-control" placeholder="address" required>
+					</div>
+					<div ng-show="submitted && articleForm.address.$invalid" class="help-block">
+						<p ng-show="articleForm.address.$error.required" class="text-danger">Address Name is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && articleForm.city.$invalid}">
+					<label class="control-label" for="address">City</label>
+					<div class="controls">
+						<input name="city" type="text" data-ng-model="article.city" id="city" class="form-control" placeholder="city" required>
+					</div>
+					<div ng-show="submitted && articleForm.city.$invalid" class="help-block">
+						<p ng-show="articleForm.city.$error.required" class="text-danger">City Name is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && articleForm.country.$invalid}">
+					<label class="control-label" for="address">Country</label>
+					<div class="controls">
+						<input name="country" type="text" data-ng-model="article.country" id="country" class="form-control" placeholder="country" required>
+					</div>
+					<div ng-show="submitted && articleForm.country.$invalid" class="help-block">
+						<p ng-show="articleForm.country.$error.required" class="text-danger">Country Name is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && articleForm.industry.$invalid}">
+					<label class="control-label" for="industry">Industry</label>
+					<div class="controls">
+						<input name="industry" type="text" data-ng-model="article.industry" id="industry" class="form-control" placeholder="industry" required>
+					</div>
+					<div ng-show="submitted && articleForm.industry.$invalid" class="help-block">
+						<p ng-show="articleForm.industry.$error.required" class="text-danger">Industry Name is required</p>
+					</div>
+				</div>
+				<div class="form-group" ng-class="{ 'has-error' : submitted && articleForm.type_of_product.$invalid}">
+					<label class="control-label" for="type_of_product">Type of Product</label>
+					<div class="controls">
+						<input name="type_of_product" type="text" data-ng-model="article.type_of_product" id="type_of_product" class="form-control" placeholder="type of product" required>
+					</div>
+					<div ng-show="submitted && articleForm.type_of_product.$invalid" class="help-block">
+						<p ng-show="articleForm.type_of_product.$error.required" class="text-danger">Type of Product Name is required</p>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<input type="submit" value="Update" class="btn btn-large btn-primary btn-block btn-show">
+				</div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div> -->
+			</fieldset>
+		</form>
+	</div>
+</section>

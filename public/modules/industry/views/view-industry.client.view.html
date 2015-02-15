@@ -1,0 +1,45 @@
+<section data-ng-controller="IndustryController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="industry.title"></h1>
+	</div>
+	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == industry.user._id))">
+		<a class="btn btn-primary btn-show" href="/#!/industry/{{industry._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary btn-show" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted" style="color:#fff">
+			Posted on
+			<span data-ng-bind="industry.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="industry.user.displayName"></span>
+		</em>
+		<div class="col-md-12 login-page-bg">            
+	        <div class="row" style=" margin-top: -18px; margin-left: -18px;">
+	            <div class="col-md-12 login-page-toggle{{isInput}}">
+	                <div class="row">
+	                    <div class="col-md-1">
+	                        <span class="h4-circle{{isInput}}">1</span>
+	                    </div>
+	                    <div class="col-md-11 pull-left">
+	                        <h3 class="text-default"> Industry Summary </h3>
+	                    </div>
+	                </div>                
+	            </div>
+	        </div>
+	        <div class="row">
+	        	<div class="col-md-12">
+        		    <table class="table">
+        		    	<tr>
+        		    		 <th>Industry Name</th> <td>{{industry.industry_name}}</td>
+        		    	</tr>
+        		    </table>    		
+	        	</div>
+
+	        </div>
+    	</div>
+	</small>
+</section>
