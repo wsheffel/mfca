@@ -3,6 +3,9 @@
 		<h1 data-ng-bind="article.title"></h1>
 	</div>
 	<div class="pull-right" data-ng-show="authentication.user._id == article.user._id">
+		<a class="btn btn-primary btn-show" href="/#!/articles">
+			<i class="glyphicon glyphicon-list"></i>
+		</a>
 		<a class="btn btn-primary btn-show" href="/#!/articles/{{article._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
@@ -18,5 +21,5 @@
 			<span data-ng-bind="article.user.displayName"></span>
 		</em>
 	</small>
-	<p class="lead" data-ng-bind="article.list_of_industries"></p>
+	<p class="lead" style="color:#fff;" data-ng-bind="article.industry"></p>
 </section>

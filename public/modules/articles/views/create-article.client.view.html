@@ -10,12 +10,20 @@
 			<div class="col-md-4">
 				<form name="articleForm" class="form-horizontal forgotPwd" data-ng-submit="create()" novalidate>
 					<fieldset>
-						<div class="form-group" ng-class="{ 'has-error': articleForm.title.$dirty && articleForm.title.$invalid }">
+						<div class="form-group">
+                             <label class="control-label" for="listofindustries">List of Industries</label>
+                             <div class="controls">
+	                             <select name="listofindustries" class="form-control" data-ng-model="list_of_industries" id="listofindustries" class="form-control" ng-select="" ng-change="bindIndustry(list_of_industries);"  data-ng-options="industry._id as industry.industry_name for industry in industries">
+	                             	<option value="">-- select industry --</option>
+	                             </select>
+                             </div>
+                         </div>
+						<!-- <div class="form-group" ng-class="{ 'has-error': articleForm.title.$dirty && articleForm.title.$invalid }">
 							<label class="control-label" for="listofindustries">List of Industries</label>
 							<div class="controls">
 								<input name="listofindustries" type="text" data-ng-model="list_of_industries" id="listofindustries" class="form-control" placeholder="list of industries" required>
 							</div>
-						</div>
+						</div> -->
 						<div class="form-group">
 							<label class="control-label" for="companyname">Company Name</label>
 							<div class="controls">
@@ -43,7 +51,7 @@
 						<div class="form-group">
 							<label class="control-label" for="country">Industry</label>
 							<div class="controls">
-								<input name="industry" type="text" data-ng-model="industry" id="industry" class="form-control" placeholder="industry" required>
+								<input name="industry" ng-disabled="isIndustry" type="text" data-ng-model="industry" id="industry" class="form-control" placeholder="industry" required>
 							</div>
 						</div>
 						<div class="form-group">
@@ -59,7 +67,7 @@
 				</form>
 			</div>
 			<div class="col-md-6">
-
+				
 			</div>
 		</div>
 		

@@ -1,9 +1,19 @@
 'use strict';
 
-angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles', '$modal', '$log',
-	function($scope, $stateParams, $location, Authentication, Articles, $modal, $log) {
+angular.module('articles').controller('ArticlesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Articles', '$modal', '$log', 'Industry', '_',
+	function($scope, $stateParams, $location, Authentication, Articles, $modal, $log, Industry, _) {
 		$scope.authentication = Authentication;
-
+		
+		$scope.isIndustry = false;
+		
+		$scope.industries = Industry.query();
+		
+		//console.log('industries....'+angular.toJson($scope.industries));
+		$scope.bindIndustry = function(industryname){
+			$scope.industry = _.pluck(_.where($scope.industries, {'_id':industryname}),'industry_name');
+			$scope.isIndustry = true;
+		};
+		
 		$scope.create = function() {
 			var article = new Articles({
 				list_of_industries: this.list_of_industries,
@@ -11,7 +21,7 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 				address: this.address,
 				city: this.city,
 				country: this.country,
-				industry: this.industry,
+				industry: this.industry, //_.assign(this.industry[0]),
 				type_of_product: this.type_of_product
 
 			});
@@ -66,5 +76,6 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 				articleId: $stateParams.articleId
 			});
 		};
+		
 	}
 ]);

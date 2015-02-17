@@ -12,3 +12,4 @@ angular.module('industry').factory('Industry', ['$resource',
 		});
 	}
 ]);
+
