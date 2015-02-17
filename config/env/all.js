@@ -15,6 +15,7 @@ module.exports = {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
+				'public/vendor/dc/css/dc.css',
 			],
 			js: [
 				'public/lib/angular/angular.js',
@@ -26,7 +27,10 @@ module.exports = {
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-				'public/lib/lodash/dist/lodash.compat.js'
+				'public/lib/lodash/dist/lodash.compat.js',
+				'public/vendor/dc/js/d3.js',
+				'public/vendor/dc/js/crossfilter.js',
+				'public/vendor/dc/js/dc.js'
 				
 			]
 		},

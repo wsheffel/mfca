@@ -26,6 +26,7 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 		$scope.total_LossCost = 0;
 		$scope.total_percentage = 0; 
 
+		
 		$scope.init = function(){
 			$scope.list_of_materials = [];
 			/*$scope.list_of_materials = [{
