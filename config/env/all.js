@@ -30,8 +30,9 @@ module.exports = {
 				'public/lib/lodash/dist/lodash.compat.js',
 				'public/vendor/dc/js/d3.js',
 				'public/vendor/dc/js/crossfilter.js',
-				'public/vendor/dc/js/dc.js'
-				
+				'public/vendor/dc/js/dc.js',
+				'public/vendor/angularstrap/angular-strap.min.js',
+				'public/vendor/angularstrap/angular-strap.tpl.min.js'
 			]
 		},
 		css: [

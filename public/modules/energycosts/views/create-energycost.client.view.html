@@ -1,7 +1,42 @@
 <section data-ng-controller="EnergycostsController">
      <div class="page-header">
-        <h2 style="color: aliceblue;"><strong>New</strong>  Energy Cost</h2><p style="color: rgb(190, 190, 190);"><i>input / output
+        <h2><strong>New</strong>  Energy Cost</h2><p><i>input / output
     </i></p>
+    </div>
+     <div class="row">
+    	<div class="col-md-4">
+	    	<div class="form-group">
+				<label>Industry</label>
+				<div class="input-group input-group-md">							
+					<span class="input-group-addon">
+						<i class="text-muted glyphicon glyphicon-user"></i>
+					</span>
+					<input type="text" class="form-control" ng-model="selectedIndustry" ng-options="industry for industry in industries" placeholder="Enter industry name" bs-typeahead>
+				</div>
+			</div>
+		</div>
+    	<div class="col-md-4">
+	    	<div class="form-group">
+				<label>Company</label>
+				<div class="input-group input-group-md">							
+					<span class="input-group-addon">
+						<i class="text-muted glyphicon glyphicon-user"></i>
+					</span>
+					<input type="text" class="form-control" ng-model="selectedCompany" ng-options="company for company in companys" placeholder="Enter company name" bs-typeahead>
+				</div>
+			</div>
+		</div>
+    	<div class="col-md-4">
+	    	<div class="form-group">
+				<label>Product</label>
+				<div class="input-group input-group-md">
+					<span class="input-group-addon">
+						<i class="text-muted glyphicon glyphicon-asterisk"></i>
+					</span>
+					<input type="text" class="form-control" ng-model="selectedProduct" ng-options="product for product in products" placeholder="Enter product name" bs-typeahead>
+				</div>
+			</div> 
+    	</div>
     </div>
     <div class="col-md-12 login-page-bg">            
         <div class="row" style=" margin-top: -18px;margin-left: -18px;">
