@@ -20,6 +20,38 @@
 			by
 			<span data-ng-bind="article.user.displayName"></span>
 		</em>
+		<div class="col-md-12 login-page-bg">            
+	        <div class="row" style=" margin-top: -18px; margin-left: -18px;">
+	            <div class="col-md-12 login-page-toggle-active">
+	                <div class="row">
+	                    <div class="col-md-11 pull-left">
+	                        <h3 class="text-default"> Company Summary </h3>
+	                    </div>
+	                </div>                
+	            </div>
+	        </div>
+	        <div class="row" style="margin-top:10px;">
+	        	<div class="col-md-12">
+        		    <table class="table table-bordered">
+        		    	<tr>
+        		    		 <th>Industry Name</th>
+        		    		 <th>Company Name</th>
+        		    		 <th>Address</th>
+        		    		 <th>City</th>
+        		    		 <th>Country</th>        		    		 
+        		    	</tr>
+        		    	<tr> 
+        		    		<td><p  data-ng-bind="article.industry"></p></td>
+        		    		<td><p  data-ng-bind="article.company_name"></p></td>
+        		    		<td><p  data-ng-bind="article.address"></p></td>
+        		    		<td><p  data-ng-bind="article.city"></p></td>
+        		    		<td><p  data-ng-bind="article.country"></p></td>
+        		    	</tr>
+        		    </table>    		
+	        	</div>
+
+	        </div>
+    	</div>
 	</small>
-	<p class="lead" style="color:#fff;" data-ng-bind="article.industry"></p>
+	
 </section>

@@ -6,12 +6,15 @@
 		<a class="btn btn-primary btn-show" href="/#!/industry/{{industry._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
+		<a class="btn btn-primary btn-show" href="/#!/industry">
+			<i class="glyphicon glyphicon-list"></i>
+		</a>
 		<a class="btn btn-primary btn-show" data-ng-click="remove();">
 			<i class="glyphicon glyphicon-trash"></i>
 		</a>
 	</div>
 	<small>
-		<em class="text-muted" style="color:#fff">
+		<em class="text-muted" style="color:#15558B">
 			Posted on
 			<span data-ng-bind="industry.created | date:'mediumDate'"></span>
 			by

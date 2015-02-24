@@ -15,14 +15,15 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 		};
 		
 		$scope.create = function() {
+			debugger;
 			var article = new Articles({
 				list_of_industries: this.list_of_industries,
 				company_name: this.company_name,
 				address: this.address,
 				city: this.city,
 				country: this.country,
-				industry: this.industry, //_.assign(this.industry[0]),
-				type_of_product: this.type_of_product
+				industry: this.industry //_.assign(this.industry[0]),
+				//type_of_product: this.type_of_product
 
 			});
 			article.$save(function(response) {
@@ -34,7 +35,7 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 				$scope.city= '';
 				$scope.country= '';
 				$scope.industry= '';
-				$scope.type_of_product= '';
+				//$scope.type_of_product= '';
 				
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
@@ -75,6 +76,7 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 			$scope.article = Articles.get({
 				articleId: $stateParams.articleId
 			});
+			debugger;
 		};
 		
 	}

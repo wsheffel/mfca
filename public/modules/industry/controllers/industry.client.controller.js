@@ -9,13 +9,13 @@ angular.module('industry').controller('IndustryController',
 
 		$scope.create = function() {
 			var industry = new Industry({
-				title: this.title,
+				//title: this.title,
 				industry_name: this.industry_name
 			});
 			industry.$save(function(response) {
 				$location.path('industry/' + response._id);
 
-				$scope.title = '';
+				//$scope.title = '';
 				$scope.industry_name = '';
 				
 			}, function(errorResponse) {
@@ -62,7 +62,7 @@ angular.module('industry').controller('IndustryController',
 		
 
 		/* Chart */
-		var productPercentage   = dc.pieChart("#Product-Percentage"),    
+		/*var productPercentage   = dc.pieChart("#Product-Percentage"),    
 	    inputCost = dc.barChart("#InputCost"),
 	    outputCost = dc.barChart("#OutputCost");
 
@@ -184,6 +184,6 @@ angular.module('industry').controller('IndustryController',
 	        .ordinalColors(["#4CAF50","#E91E63","#9C27B0","#F44336","#00BCD4","#8BC34A","#4CAF50","#FFEB3B","#FF5722","#FFC107"]);
 	  
 	  
-	    dc.renderAll();
+	    dc.renderAll();*/
 	}
 ]);
