@@ -25,6 +25,10 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 		$scope.total_LossQuantity=0;
 		$scope.total_LossCost = 0;
 		$scope.total_percentage = 0; 
+		
+		// newly added
+		$scope.isEditForm = false;
+		$scope.currentItem = {};
 
 		//select industry name
 		$scope.selectedIndustry = "";
@@ -158,7 +162,8 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 
 		// addItem - push our new item 
 		$scope.addItem = function(){
-			if(!_.isEmpty($scope.input_item) && !_.isUndefined($scope.input_item) && 
+			if(!_.isEmpty($scope.selectedProduct) && !_.isUndefined($scope.selectedProduct) && 
+				!_.isEmpty($scope.input_item) && !_.isUndefined($scope.input_item) && 
 				!_.isEmpty($scope.input_quantity) && !_.isUndefined($scope.input_quantity) && 
 				!_.isEmpty($scope.input_price) && !_.isUndefined($scope.input_price)){
 				$scope.new_material_item = {
@@ -166,7 +171,7 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 					input_price: $scope.input_price,
 					input_quantity: $scope.input_quantity,
 					input_cost: $scope.input_cost,
-					output_pamt_quantity: $scope.output_pamt_quantity,
+					output_pamt_quantity: $scope.input_quantity,
 					output_pamt_cost: $scope.output_pamt_cost,
 					output_lamt_quantity: $scope.output_lamt_quantity,
 					output_lamt_cost: $scope.output_lamt_cost
@@ -178,7 +183,7 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 				$scope.success = 'Item added successfully';
 			}else{
 				$scope.success = '';
-				$scope.error = 'Data missing : Item, Quantity, Cost';  //TODO : need more validation
+				$scope.error = 'Data missing : Product, Item, Quantity, Cost';  //TODO : need more validation
 			}
 		};
 		$scope.closeAlert = function(){
@@ -209,45 +214,74 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 
 		// Create new Typeofmaterial
 		$scope.create = function() {
-			$scope.input_item = $scope.list_of_materials[0].input_item;
-			$scope.input_price = $scope.list_of_materials[0].input_price;
-			$scope.input_quantity = $scope.list_of_materials[0].input_quantity;
-			$scope.input_cost = $scope.list_of_materials[0].input_cost;
-			$scope.output_pamt_quantity = $scope.list_of_materials[0].output_pamt_quantity;
-			$scope.output_pamt_cost = $scope.list_of_materials[0].output_pamt_cost;
-			$scope.output_lamt_quantity = $scope.list_of_materials[0].output_lamt_quantity;
-			$scope.output_lamt_cost = $scope.list_of_materials[0].output_lamt_cost;
+			var isSave = false;
+			$scope.currentList = [];
+			if(!_.isUndefined($scope.list_of_materials) &&
+					_.size($scope.list_of_materials) > 0){
 				
-
-			// Create new Typeofmaterial object
-			var typeofmaterial = new Typeofmaterials ({
-				input_item: $scope.input_item,
-				input_price: $scope.input_price,
-				input_quantity: $scope.input_quantity,
-				input_cost: $scope.input_cost,
-				output_pamt_quantity: $scope.output_pamt_quantity,
-				output_pamt_cost: $scope.output_pamt_cost,
-				output_lamt_quantity: $scope.output_lamt_quantity,
-				output_lamt_cost: $scope.output_lamt_cost,
-				total_inputQuantity: $scope.total_inputQuantity,
-				total_input_cost: $scope.total_input_cost,
-				total_ProdQuantity: $scope.total_ProdQuantity,
-				total_ProdCost: $scope.total_ProdCost,
-				total_LossQuantity: $scope.total_LossQuantity,
-				total_LossCost: $scope.total_LossCost,
-				total_percentage: $scope.total_percentage
-			});
-			console.log(angular.toJson(typeofmaterial));
-
-			// Redirect after save
-			typeofmaterial.$save(function(response) {
-				$location.path('typeofmaterials/' + response._id);
+				_.forEach($scope.list_of_materials, function (saveObj, index){
 				
-				// Clear form fields
-				$scope.input_item = '';
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
+					$scope.input_item = saveObj.input_item;
+					$scope.input_price = saveObj.input_price;
+					$scope.input_quantity = saveObj.input_quantity;
+					$scope.input_cost = saveObj.input_cost;
+					$scope.output_pamt_quantity = saveObj.output_pamt_quantity;
+					$scope.output_pamt_cost = saveObj.output_pamt_cost;
+					$scope.output_lamt_quantity = saveObj.output_lamt_quantity;
+					$scope.output_lamt_cost = saveObj.output_lamt_cost;
+						
+		
+					// Create new Typeofmaterial object
+					var typeofmaterial = new Typeofmaterials ({
+						input_item: $scope.input_item,
+						input_price: $scope.input_price,
+						input_quantity: $scope.input_quantity,
+						input_cost: $scope.input_cost,
+						output_pamt_quantity: $scope.output_pamt_quantity,
+						output_pamt_cost: $scope.output_pamt_cost,
+						output_lamt_quantity: $scope.output_lamt_quantity,
+						output_lamt_cost: $scope.output_lamt_cost,
+						total_inputQuantity: $scope.total_inputQuantity,
+						total_input_cost: $scope.total_input_cost,
+						total_ProdQuantity: $scope.total_ProdQuantity,
+						total_ProdCost: $scope.total_ProdCost,
+						total_LossQuantity: $scope.total_LossQuantity,
+						total_LossCost: $scope.total_LossCost,
+						total_percentage: $scope.total_percentage/*,
+						user: $scope.authentication.user		*/			
+					});
+					
+					
+					// Redirect after save
+					typeofmaterial.$save(function(response) {	
+						
+						$scope.currentList.push(response);
+						
+						// Clear form fields
+						$scope.input_item = '';
+						$scope.input_price = ''
+						$scope.input_quantity = '';
+						$scope.input_cost = '';
+						$scope.output_pamt_quantity = '';
+						$scope.output_pamt_cost = '';
+						$scope.output_lamt_quantity = '';
+						$scope.output_lamt_cost = '';
+						
+						if(_.isEqual(_.size($scope.list_of_materials), (index+1))){
+							isSave = true;
+							console.log('isSavessdfsd...', isSave);
+						}
+						
+						if(isSave){
+							$location.path('typeofmaterials/viewCurrent');
+						}
+						
+					}, function(errorResponse) {
+						$scope.error = errorResponse.data.message;
+					});
+				});
+				
+			}
 		};
 
 		// Remove existing Typeofmaterial
@@ -286,9 +320,40 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 
 		// Find existing Typeofmaterial
 		$scope.findOne = function() {
-			$scope.typeofmaterial = Typeofmaterials.get({ 
-				typeofmaterialId: $stateParams.typeofmaterialId
-			});
+			console.log('$scope.currentList...', angular.toJson($scope.currentList));
+			if(!_.isEqual($stateParams.typeofmaterialId, 'viewCurrent')){
+				$scope.typeofmaterial = [];
+				$scope.typeofmaterial.push(Typeofmaterials.get({ 
+					typeofmaterialId: $stateParams.typeofmaterialId
+				}));
+			} else {
+				console.log('$scope.currentList...', angular.toJson($scope.currentList));
+				$scope.typeofmaterial = $scope.currentList;
+			}
+		};
+		
+		// added by tech-works
+		$scope.editSystemCost = function(currentItem) {
+			$scope.currentItem = {};
+			$scope.currentItem = _.cloneDeep(currentItem);
+			$scope.isEditForm = true;
+		};
+		
+		$scope.updateItem = function(){
+			var updatedItemIndex = _.findIndex($scope.list_of_materials, function(item) 
+					{ return _.isEqual(item.input_item, $scope.currentItem.input_item); });
+			_.assign($scope.list_of_materials[updatedItemIndex], $scope.currentItem);
+			$scope.currentItem = {};
+			$scope.isEditForm = false;
+			$scope.loadItems();
+		};
+		
+		$scope.deleteSystemCost = function(currentItem) {
+			_.remove($scope.list_of_materials, function(item) 
+					{ return _.isEqual(item.input_item, currentItem.input_item); });
+			$scope.currentItem = {};
+			$scope.isEditForm = false;
+			$scope.loadItems();
 		};
 
 		$scope.init();

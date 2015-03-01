@@ -1,13 +1,14 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus',
-	function($scope, Authentication, Menus) {
+angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Menus', '_',
+	function($scope, Authentication, Menus, _) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
 		$scope.menu = Menus.getMenu('topbar');
 
 		$scope.init = function(){
-			if(!_.isEqual($scope.authentication.user.username, "admin")){
+			var adminRole = $scope.authentication.user.roles[0];
+			if(!_.isEqual(adminRole, 'admin')){
 				$scope.menu.items = _.filter($scope.menu.items, function(item) { return item.title !== "Industry"; });
 			}		
 		};

@@ -4,7 +4,7 @@
     </i></p>
     </div>
     <div class="row">
-    	<div class="col-md-4">
+    	<!-- <div class="col-md-4">
 	    	<div class="form-group">
 				<label>Industry</label>
 				<div class="input-group input-group-md">							
@@ -14,8 +14,8 @@
 					<input type="text" class="form-control" ng-model="selectedIndustry" ng-options="industry for industry in industries" placeholder="Enter industry name" bs-typeahead>
 				</div>
 			</div>
-		</div>
-    	<div class="col-md-4">
+		</div> -->
+    	<!-- <div class="col-md-4">
 	    	<div class="form-group">
 				<label>Company</label>
 				<div class="input-group input-group-md">							
@@ -25,7 +25,7 @@
 					<input type="text" class="form-control" ng-model="selectedCompany" ng-options="company for company in companys" placeholder="Enter company name" bs-typeahead>
 				</div>
 			</div>
-		</div>
+		</div> -->
     	<div class="col-md-4">
 	    	<div class="form-group">
 				<label>Product</label>
@@ -33,7 +33,7 @@
 					<span class="input-group-addon">
 						<i class="text-muted glyphicon glyphicon-asterisk"></i>
 					</span>
-					<input type="text" class="form-control" ng-model="selectedProduct" ng-options="product for product in products" placeholder="Enter product name" bs-typeahead>
+					<input type="text" class="form-control" ng-model="selectedProduct" ng-options="product for product in products" required placeholder="Enter product name" bs-typeahead>
 				</div>
 			</div> 
     	</div>
@@ -78,7 +78,7 @@
         </div>  
         
         <div ng-show="isCollapsedIn">
-            <form class="form-inline forgotPwd" name="list_of_materialsForm" data-ng-submit="addItem()" novalidate>            
+            <form class="form-inline forgotPwd" ng-hide="isEditForm" name="list_of_materialsForm" data-ng-submit="addItem()" novalidate>            
                 <fieldset>
                     <div class="row">
                         <div class="col-md-3">
@@ -91,7 +91,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label text-muted"  for="input_price">Material Price</label>
+                                <label class="control-label text-muted"  for="input_price">Material Price ( $ / kg )</label>
                                  <div class="form-group">
                                     <input type="text" data-ng-model="input_price" id="input_price" class="form-control" placeholder="input price" required>
                                 </div>
@@ -99,7 +99,7 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label text-muted" for="input_quantity">Quantity</label>
+                                <label class="control-label text-muted" for="input_quantity">Quantity ( kg )</label>
                                 <div class="controls">
                                     <input type="text" data-ng-model="input_quantity" id="input_quantity" class="form-control" placeholder="quantity" required>
                                 </div>
@@ -124,6 +124,56 @@
                     </div>
                 </fieldset>
             </form>
+            
+            <!-- Edit From -->
+            <form class="form-inline forgotPwd" ng-show="isEditForm" name="list_of_materialsForm" ng-model="currentItem" data-ng-submit="updateItem()" novalidate>            
+                <fieldset>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label text-muted" for="item">New Item</label>
+                                <div class="controls">
+                                    <input type="text" data-ng-model="currentItem.input_item" id="item" class="form-control " placeholder="item" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label text-muted"  for="input_price">Material Price ( $ / kg )</label>
+                                 <div class="form-group">
+                                    <input type="text" data-ng-model="currentItem.input_price" id="input_price" class="form-control" placeholder="input price" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label text-muted" for="input_quantity">Quantity ( kg )</label>
+                                <div class="controls">
+                                    <input type="text" data-ng-model="currentItem.input_quantity" id="input_quantity" class="form-control" placeholder="quantity" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="control-label text-muted" style="margin-bottom: 12px;" for="input_cost">Cost</label>
+                                <div class="controls">
+                                    <p class="control-label text-muted text-center"  data-ng-model="currentItem.input_cost" for="input_cost" >{{currentItem.input_cost = currentItem.input_price * currentItem.input_quantity | currency:"$":0}}  </p>    
+                                </div>
+                            </div>
+                           
+                        </div> 
+                        <div class="col-md-1">
+                            <div class="form-group" style="margin-left: 23px;margin-top: 24px;">
+                                <div class="form-group">
+                                    <input type="submit" value="Update" ng-click="focusInput=true" class="btn btn-primary btn-show pull-left btn-sm">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <!--  -->
+            
             <h4 style="text-decoration:underline"><strong>Input</strong> Items</h4>
             <div class="table-responsive">
                 <table data-sortable class="table">
@@ -147,8 +197,8 @@
                             <td>
                                 <div class="btn-group btn-group-xs">
                                     
-                                    <a data-toggle="tooltip" title="Edit" class="btn btn-warning btn-show"><i class="glyphicon glyphicon-edit"></i></a>
-                                    <a data-toggle="tooltip" title="Delete" class="btn btn-danger btn-show"><i class="glyphicon glyphicon-remove"></i></a>
+                                    <a data-toggle="tooltip" title="Edit" class="btn btn-warning btn-show" ng-click="editSystemCost(list_of_material);"><i class="glyphicon glyphicon-edit"></i></a>
+                                    <a data-toggle="tooltip" title="Delete" class="btn btn-danger btn-show" ng-click="deleteSystemCost(list_of_material);"><i class="glyphicon glyphicon-remove"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -173,10 +223,10 @@
                             <tr>
                                 <th>No</th>
                                 <th>Item</th>
-                                <th>Quantity</th>
-                                <th>Cost</th>
-                                <th>Loss Quantity</th>
-                                <th>Loss cost</th>
+                                <th>Quantity ( kg )</th>
+                                <th>Cost ( $ )</th>
+                                <th>Loss Quantity ( kg )</th>
+                                <th>Loss cost ( $ )</th>
                                 <th>%</th>
                             </tr>
                         </thead>                    
@@ -186,7 +236,7 @@
                                 <td><strong>{{list_of_material.input_item}}</strong></td>
                                 <td> <div class="form-group">
                                         <div class="controls">
-                                            <input type="text" data-ng-model="list_of_material.output_pamt_quantity" id="output_pamt_quantity" class="form-control" placeholder="Quantity" ng-blur="loadItems()" required>
+                                            <input type="text" data-ng-model="list_of_material.output_pamt_quantity" id="output_pamt_quantity" class="form-control" placeholder="Quantity" ng-blur="loadItems()" disabled>
                                         </div>
                                     </div></td>
                                 <td>{{list_of_material.output_pamt_cost = list_of_material.output_pamt_quantity * list_of_material.input_price | currency:"$":0}}</td>
