@@ -2,8 +2,8 @@
 
 // Typeofmaterials controller
 angular.module('typeofmaterials').controller('TypeofmaterialsController', 
-		['$scope', '$stateParams', '$location', 'Authentication', 'Typeofmaterials', '_',
-	function($scope, $stateParams, $location, Authentication, Typeofmaterials, _) {
+		['$scope', '$stateParams', '$location', 'Authentication', 'Typeofmaterials', '_', 'Articles',
+	function($scope, $stateParams, $location, Authentication, Typeofmaterials, _, Articles) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsedIn = true;
 		$scope.isInput='-active';
@@ -40,6 +40,8 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 
 		//select product name
 		$scope.selectedProduct = "";
+		$scope.product_name = "";
+		$scope.company = {};
 		$scope.products = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
 
 		$scope.init = function(){
@@ -158,6 +160,20 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 
 			//Total output %
 			$scope.total_percentage = $scope.total_LossQuantity / $scope.total_inputQuantity;
+			
+			Articles.query().$promise.then(function(response){
+				$scope.company = _.find(response, function(company){
+					if(_.isEqual(company.user._id, $scope.authentication.user._id)){
+						return true;
+					}
+				});
+				$scope.company = $scope.company._id;
+			});
+			
+			Typeofmaterials.query().$promise.then(function(response){
+				$scope.products = _.pluck(response, 'product_name');
+			});
+			
 		};
 
 		// addItem - push our new item 
@@ -174,7 +190,9 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 					output_pamt_quantity: $scope.input_quantity,
 					output_pamt_cost: $scope.output_pamt_cost,
 					output_lamt_quantity: $scope.output_lamt_quantity,
-					output_lamt_cost: $scope.output_lamt_cost
+					output_lamt_cost: $scope.output_lamt_cost,
+					product_name: $scope.selectedProduct,
+					company: $scope.company
 				};
 				$scope.list_of_materials.push($scope.new_material_item);
 				$scope.loadItems();
@@ -229,7 +247,8 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 					$scope.output_pamt_cost = saveObj.output_pamt_cost;
 					$scope.output_lamt_quantity = saveObj.output_lamt_quantity;
 					$scope.output_lamt_cost = saveObj.output_lamt_cost;
-						
+					$scope.product_name = saveObj.product_name;
+					$scope.company = saveObj.company;
 		
 					// Create new Typeofmaterial object
 					var typeofmaterial = new Typeofmaterials ({
@@ -247,7 +266,9 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 						total_ProdCost: $scope.total_ProdCost,
 						total_LossQuantity: $scope.total_LossQuantity,
 						total_LossCost: $scope.total_LossCost,
-						total_percentage: $scope.total_percentage/*,
+						total_percentage: $scope.total_percentage,
+						product_name: $scope.product_name,
+						company: $scope.company/*,
 						user: $scope.authentication.user		*/			
 					});
 					
@@ -266,6 +287,7 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 						$scope.output_pamt_cost = '';
 						$scope.output_lamt_quantity = '';
 						$scope.output_lamt_cost = '';
+						$scope.product_name = '';
 						
 						if(_.isEqual(_.size($scope.list_of_materials), (index+1))){
 							isSave = true;
