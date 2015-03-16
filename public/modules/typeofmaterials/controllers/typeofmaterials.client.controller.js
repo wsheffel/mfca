@@ -346,7 +346,6 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 
 		// Find existing Typeofmaterial
 		$scope.findOne = function() {
-			console.log('$scope.currentList...', angular.toJson($state));
 			if(!_.isEqual($stateParams.typeofmaterialId, 'viewCurrent')){
 				$scope.typeofmaterial = [];
 				$scope.typeofmaterial.push(Typeofmaterials.get({ 
@@ -357,7 +356,6 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 					$scope.typeofmaterial = _.filter(response, {'product_name' : $stateParams.typeofmaterialId});
 				});
 			} else {
-				console.log('$scope.currentList...', angular.toJson($scope.currentList));
 				$scope.typeofmaterial = Typeofmaterials.get({ 
 					typeofmaterialId: $stateParams.typeofmaterialId
 				});
