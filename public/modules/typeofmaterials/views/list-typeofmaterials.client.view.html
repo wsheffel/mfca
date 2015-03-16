@@ -17,20 +17,20 @@
     </div>
     
     <div class="list-group">
-        <a data-ng-repeat="typeofmaterial in typeofmaterials | filter:searchType" data-ng-href="#!/typeofmaterials/{{typeofmaterial._id}}" class="list-group-item">
-			<small class="list-group-item-text">
+        <a data-ng-repeat="(key, value) in typeofmaterials | filter:searchType" data-ng-href="#!/typeofmaterials/product_type/{{key}}" class="list-group-item">
+	<!-- 		<small class="list-group-item-text">
 				Posted on
 				<span data-ng-bind="typeofmaterial.created | date:'medium'"></span>
 				by
 				<span data-ng-bind="typeofmaterial.user.displayName"></span>
-			</small>
+			</small> -->
             <div class="row">
                 <div class="col-md-3">
-                    <h4 class="list-group-item-heading" data-ng-bind="typeofmaterial.input_item"></h4>
+                    <h4 class="list-group-item-heading" data-ng-bind="key"></h4>
                 </div>
-                <div class="col-md-1">
+               <!--  <div class="col-md-1">
                     {{typeofmaterial.total_percentage * 100 | number:0}} %
-                </div>
+                </div> -->
             </div>
         </a>
     </div>

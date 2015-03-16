@@ -17,6 +17,10 @@ angular.module('typeofmaterials').config(['$stateProvider',
 			url: '/typeofmaterials/:typeofmaterialId',
 			templateUrl: 'modules/typeofmaterials/views/view-typeofmaterial.client.view.html'
 		}).
+		state('viewCurrentTypeofmaterial', {
+			url: '/typeofmaterials/:viewCurrentTypeofmaterial/:typeofmaterialId',
+			templateUrl: 'modules/typeofmaterials/views/view-typeofmaterial.client.view.html'
+		}).
 		state('editTypeofmaterial', {
 			url: '/typeofmaterials/:typeofmaterialId/edit',
 			templateUrl: 'modules/typeofmaterials/views/edit-typeofmaterial.client.view.html'

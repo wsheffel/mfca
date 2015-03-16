@@ -169,9 +169,8 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 				});
 				$scope.company = $scope.company._id;
 			});
-			
 			Typeofmaterials.query().$promise.then(function(response){
-				$scope.products = _.pluck(response, 'product_name');
+				$scope.products = _.uniq(_.pluck(response, 'product_name'));
 			});
 			
 		};
@@ -287,7 +286,7 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 						$scope.output_pamt_cost = '';
 						$scope.output_lamt_quantity = '';
 						$scope.output_lamt_cost = '';
-						$scope.product_name = '';
+						//$scope.product_name = '';
 						
 						if(_.isEqual(_.size($scope.list_of_materials), (index+1))){
 							isSave = true;
@@ -295,7 +294,7 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 						}
 						
 						if(isSave){
-							$location.path('typeofmaterials/viewCurrent');
+							$location.path('typeofmaterials/product_type/'+$scope.product_name);
 						}
 						
 					}, function(errorResponse) {
@@ -336,21 +335,33 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 
 		// Find a list of Typeofmaterials
 		$scope.find = function() {
-			$scope.typeofmaterials = Typeofmaterials.query();
+			//$scope.typeofmaterials = Typeofmaterials.query();
+			
+			Typeofmaterials.query().$promise.then(function(response){
+				$scope.typeofmaterials = _.groupBy(response, 'product_name');
+			});
+			
 			console.log(angular.toJson($scope.typeofmaterials));
 		};
 
 		// Find existing Typeofmaterial
 		$scope.findOne = function() {
-			console.log('$scope.currentList...', angular.toJson($scope.currentList));
+			console.log('$scope.currentList...', angular.toJson($state));
 			if(!_.isEqual($stateParams.typeofmaterialId, 'viewCurrent')){
 				$scope.typeofmaterial = [];
 				$scope.typeofmaterial.push(Typeofmaterials.get({ 
 					typeofmaterialId: $stateParams.typeofmaterialId
 				}));
+			} if(_.isEqual($stateParams.viewCurrentTypeofmaterial, 'product_type')){
+				Typeofmaterials.query().$promise.then(function(response){
+					$scope.typeofmaterial = _.filter(response, {'product_name' : $stateParams.typeofmaterialId});
+				});
 			} else {
 				console.log('$scope.currentList...', angular.toJson($scope.currentList));
-				$scope.typeofmaterial = $scope.currentList;
+				$scope.typeofmaterial = Typeofmaterials.get({ 
+					typeofmaterialId: $stateParams.typeofmaterialId
+				});
+				
 			}
 		};
 		
