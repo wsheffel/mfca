@@ -1,6 +1,9 @@
 <section data-ng-controller="MateriallossesController" data-ng-init="find()">
     <div class="page-header">
-        <h1>Materiallosses</h1>
+        
+         <h2><strong>List</strong> of Losses</h2><p><i>input / output
+    </i></p>
+    
         <div class="row">
         <div class="col-xs-12 col-md-8">
             <div class="input-group input-group-md">
@@ -15,21 +18,21 @@
     </div>
     </div>
     <div class="list-group">
-        <a data-ng-repeat="materialloss in materiallosses | filter:searchMaterialLoss" data-ng-href="#!/materiallosses/{{materialloss._id}}" class="list-group-item">
-			<small class="list-group-item-text">
+        <a data-ng-repeat="(key, value) in materiallosses | filter:searchMaterialLoss" data-ng-href="#!/materiallosses/product_type/{{key}}" class="list-group-item">
+			<!-- <small class="list-group-item-text">
 				Posted on
 				<span data-ng-bind="materialloss.created | date:'medium'"></span>
 				by
 				<span data-ng-bind="materialloss.user.displayName"></span>
 			</small>
-            
+             -->
 			<div class="row">
                 <div class="col-md-3">
-                    <h4 class="list-group-item-heading" data-ng-bind="materialloss.input_item"></h4>
+                    <h4 class="list-group-item-heading" data-ng-bind="key"></h4>
                 </div>
-                <div class="col-md-1">
+                <!-- <div class="col-md-1">
                     {{materialloss.total_percentage * 100  | number:0}} %
-                </div>
+                </div> -->
             </div>
         </a>
     </div>

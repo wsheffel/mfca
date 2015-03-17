@@ -17,6 +17,10 @@ angular.module('energycosts').config(['$stateProvider',
 			url: '/energycosts/:energycostId',
 			templateUrl: 'modules/energycosts/views/view-energycost.client.view.html'
 		}).
+		state('viewCurrentEnergycost', {
+			url: '/energycosts/:viewCurrentEnergycost/:energycostId',
+			templateUrl: 'modules/energycosts/views/view-energycost.client.view.html'
+		}).
 		state('editEnergycost', {
 			url: '/energycosts/:energycostId/edit',
 			templateUrl: 'modules/energycosts/views/edit-energycost.client.view.html'

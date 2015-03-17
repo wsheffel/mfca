@@ -1,6 +1,6 @@
 <section data-ng-controller="SystemcostsController" data-ng-init="findOne()">
 	<div class="page-header">
-		<h1 data-ng-bind="systemcost.name"></h1>
+		<h1 data-ng-bind="systemcost[0].name"></h1>
 	</div>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == systemcost.user._id))">
 		<a class="btn btn-primary btn-show" href="/#!/systemcosts">
@@ -13,9 +13,9 @@
 	<small>
 		<em class="text-muted" style="color:#fff">
 			Posted on
-			<span data-ng-bind="systemcosts.created | date:'mediumDate'"></span>
+			<span data-ng-bind="systemcosts[0].created | date:'mediumDate'"></span>
 			by
-			<span data-ng-bind="systemcosts.user.displayName"></span>
+			<span data-ng-bind="systemcosts[0].user.displayName"></span>
 		</em>
 		<div class="col-md-12 login-page-bg">            
 	        <div class="row" style=" margin-top: -18px;margin-left: -18px;">
@@ -30,32 +30,35 @@
 	                </div>                
 	            </div>
 	        </div>
-	        <div class="row">
+	        <div class="row"  data-ng-repeat="scost in systemcost track by $index">
+	        	<div style="background-color:#EEEDEE;padding: 2px;"><i class="glyphicon glyphicon-option-vertical"></i>   <b>{{$index}}</b>
+                </div>
+                <br>
 	        	<div class="col-md-12">
         		    <table class="table">
         		    	<tr>
-        		    		 <th>Item</th> <td>{{systemcost.input_item}}</td>
+        		    		 <th>Item</th> <td>{{scost.input_item}}</td>
         		    	</tr>
         		    	<tr>
-        		    		 <th>Input Quantity</th> <td>{{systemcost.total_inputQuantity}}</td>
+        		    		 <th>Input Quantity</th> <td>{{scost.total_inputQuantity}}</td>
         		    	</tr>
         		    	<tr>
-        		    		 <th>Input Cost</th> <td>{{systemcost.total_input_cost}}</td>
+        		    		 <th>Input Cost</th> <td>{{scost.total_input_cost}}</td>
         		    	</tr>
         		    	<tr>
-        		    		<th>Total Product Quantity</th><td>{{systemcost.total_ProdQuantity}}</td>
+        		    		<th>Total Product Quantity</th><td>{{scost.total_ProdQuantity}}</td>
         		    	</tr>
         		    	<tr>
-        		    		<th>Total Product Cost</th><td>{{systemcost.total_ProdCost | currency:"$":0}}</td>
+        		    		<th>Total Product Cost</th><td>{{scost.total_ProdCost | currency:"$":0}}</td>
         		    	</tr>
         		    	<tr>
-        		    		<th>Total Loss Quantity</th><td>{{systemcost.total_LossQuantity}}</td>
+        		    		<th>Total Loss Quantity</th><td>{{scost.total_LossQuantity}}</td>
         		    	</tr>
         		    	<tr>
-        		    		<th>Total Loss cost</th><td>{{systemcost.total_LossCost | currency:"$":0}}</td>
+        		    		<th>Total Loss cost</th><td>{{scost.total_LossCost | currency:"$":0}}</td>
         		    	</tr>
         		    	<tr>
-        		    		<th>Total %</th><td>{{(systemcost.total_percentage | number:2) * 100 | number:0}}%</td>
+        		    		<th>Total %</th><td>{{(scost.total_percentage | number:2) * 100 | number:0}}%</td>
         		    	</tr>
         		    </table>    		
 	        	</div>

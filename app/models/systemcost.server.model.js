@@ -92,7 +92,16 @@ var SystemcostSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
-	}
+	},
+    product_name: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    company: {
+        type: Schema.ObjectId,
+        ref: 'Article'
+    }
 });
 
 mongoose.model('Systemcost', SystemcostSchema);

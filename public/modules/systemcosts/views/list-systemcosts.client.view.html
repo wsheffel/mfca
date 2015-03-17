@@ -1,6 +1,9 @@
 <section data-ng-controller="SystemcostsController" data-ng-init="find()">
     <div class="page-header">
-        <h1>Systemcosts</h1>
+        
+        <h2><strong>List</strong> of System Cost</h2><p><i>input / output
+    </i></p>
+    
             <div class="row">
         <div class="col-xs-12 col-md-8">
             <div class="input-group input-group-md">
@@ -15,20 +18,20 @@
     </div>
     </div>
     <div class="list-group">
-        <a data-ng-repeat="systemcost in systemcosts | filter:searchSystemCost" data-ng-href="#!/systemcosts/{{systemcost._id}}" class="list-group-item">
-           <small class="list-group-item-text">
+        <a data-ng-repeat="(key, value) in systemcost | filter:searchSystemCost" data-ng-href="#!/systemcosts/product_type/{{key}}" class="list-group-item">
+          <!--  <small class="list-group-item-text">
                 Posted on
                 <span data-ng-bind="systemcost.created | date:'medium'"></span>
                 by
                 <span data-ng-bind="systemcost.user.displayName"></span>
-            </small>
+            </small> -->
             <div class="row">
                 <div class="col-md-3">
-                    <h4 class="list-group-item-heading" data-ng-bind="systemcost.input_item"></h4>
+                    <h4 class="list-group-item-heading" data-ng-bind="key"></h4>
                 </div>
-                <div class="col-md-1">
+                <!-- <div class="col-md-1">
                     {{systemcost.total_percentage * 100  | number:0}} %
-                </div>
+                </div> -->
             </div>
         </a>
     </div>

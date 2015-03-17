@@ -17,6 +17,10 @@ angular.module('systemcosts').config(['$stateProvider',
 			url: '/systemcosts/:systemcostId',
 			templateUrl: 'modules/systemcosts/views/view-systemcost.client.view.html'
 		}).
+		state('viewCurrentSystemCost', {
+            url: '/systemcosts/:viewCurrentSystemCost/:systemcostId',
+            templateUrl: 'modules/systemcosts/views/view-systemcost.client.view.html'
+        }).
 		state('editSystemcost', {
 			url: '/systemcosts/:systemcostId/edit',
 			templateUrl: 'modules/systemcosts/views/edit-systemcost.client.view.html'

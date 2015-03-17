@@ -17,6 +17,10 @@ angular.module('materiallosses').config(['$stateProvider',
 			url: '/materiallosses/:materiallossId',
 			templateUrl: 'modules/materiallosses/views/view-materialloss.client.view.html'
 		}).
+		state('viewCurrentMaterialloss', {
+            url: '/materiallosses/:viewCurrentMaterialloss/:materiallossId',
+            templateUrl: 'modules/materiallosses/views/view-materialloss.client.view.html'
+        }).
 		state('editMaterialloss', {
 			url: '/materiallosses/:materiallossId/edit',
 			templateUrl: 'modules/materiallosses/views/edit-materialloss.client.view.html'

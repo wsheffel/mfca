@@ -15,7 +15,6 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 		};
 		
 		$scope.create = function() {
-			debugger;
 			var article = new Articles({
 				list_of_industries: this.list_of_industries,
 				company_name: this.company_name,
