@@ -44,74 +44,36 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 		$scope.company = {};
 		$scope.products = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
 
+		
+		/*Date control using for tracking product items*/
+		/*Start*/
+		
+		$scope.clear = function () {
+			$scope.dateofbirth = null;
+		};
+
+
+		$scope.openStartDate = function($event) {
+			$event.preventDefault();
+			$event.stopPropagation();
+
+			$scope.openedStartDate = true;
+
+		};
+		
+		$scope.openEndtDate = function($event) {
+			$event.preventDefault();
+			$event.stopPropagation();
+
+			$scope.openedEndDate = true;
+
+		};
+		
+		/*End*/
+		
 		$scope.init = function(){
 			$scope.list_of_materials = [];
-			/*$scope.list_of_materials = [{
-				input_item:'LPDS material',
-				input_price:10.7,
-				input_quantity: 53330,
-				input_cost:570442,
-				output_pamt_quantity:40000,
-				output_pamt_cost:427858,
-				output_lamt_quantity:13330,
-				output_lamt_cost:142584,
-				result_per:0
-			},
-			{
-				input_item:'DFR material',
-				input_price:1.22,
-				input_quantity: 57970,
-				input_cost:70565,
-				output_pamt_quantity:40000,
-				output_pamt_cost:48691,
-				output_lamt_quantity:17970,
-				output_lamt_cost:21874,
-				result_per:0
-			},
-			{
-				input_item:'Protection film',
-				input_price:0.69,
-				input_quantity: 56340,
-				input_cost:38786,
-				output_pamt_quantity:40000,
-				output_pamt_cost:27537,
-				output_lamt_quantity:16340,
-				output_lamt_cost:11249,
-				result_per:0
-			},
-			{
-				input_item:'Development chemical',
-				input_price:2.37,
-				input_quantity: 1000,
-				input_cost:2370,
-				output_pamt_quantity:0,
-				output_pamt_cost:0,
-				output_lamt_quantity:1000,
-				output_lamt_cost:2370,
-				result_per:0
-			},
-			{
-				input_item:'Etching chemical',
-				input_price:0.15,
-				input_quantity: 75700,
-				input_cost:11250,
-				output_pamt_quantity:0,
-				output_pamt_cost:0,
-				output_lamt_quantity:75700,
-				output_lamt_cost:11250,
-				result_per:0
-			},
-			{
-				input_item:'Release agent',
-				input_price:0.23,
-				input_quantity: 1700,
-				input_cost:394,
-				output_pamt_quantity:0,
-				output_pamt_cost:0,
-				output_lamt_quantity:1700,
-				output_lamt_cost:394,
-				result_per:0
-			}];*/
+			
 			$scope.loadItems();
 		};
 		$scope.sumItems = function(data){
@@ -192,6 +154,7 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 					output_lamt_cost: $scope.output_lamt_cost,
 					product_name: $scope.selectedProduct,
 					company: $scope.company
+					
 				};
 				$scope.list_of_materials.push($scope.new_material_item);
 				$scope.loadItems();
@@ -267,8 +230,9 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 						total_LossCost: $scope.total_LossCost,
 						total_percentage: $scope.total_percentage,
 						product_name: $scope.product_name,
-						company: $scope.company/*,
-						user: $scope.authentication.user		*/			
+						company: $scope.company,
+						startDate: $scope.startDate,
+						endDate: $scope.endDate		
 					});
 					
 					

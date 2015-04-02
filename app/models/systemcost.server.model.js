@@ -98,6 +98,14 @@ var SystemcostSchema = new Schema({
         default: '',
         trim: true
     },
+	startDate: {
+		type: String,
+		default: ''		
+	},
+	endDate: {
+		type: String,
+		default: ''		
+	},
     company: {
         type: Schema.ObjectId,
         ref: 'Article'

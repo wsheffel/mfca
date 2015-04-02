@@ -4,28 +4,7 @@
     </i></p>
     </div>
       <div class="row">
-    	<!-- <div class="col-md-4">
-	    	<div class="form-group">
-				<label>Industry</label>
-				<div class="input-group input-group-md">							
-					<span class="input-group-addon">
-						<i class="text-muted glyphicon glyphicon-user"></i>
-					</span>
-					<input type="text" class="form-control" ng-model="selectedIndustry" ng-options="industry for industry in industries" placeholder="Enter industry name" bs-typeahead>
-				</div>
-			</div>
-		</div>
-    	<div class="col-md-4">
-	    	<div class="form-group">
-				<label>Company</label>
-				<div class="input-group input-group-md">							
-					<span class="input-group-addon">
-						<i class="text-muted glyphicon glyphicon-user"></i>
-					</span>
-					<input type="text" class="form-control" ng-model="selectedCompany" ng-options="company for company in companys" placeholder="Enter company name" bs-typeahead>
-				</div>
-			</div>
-		</div> -->
+    	
     	<div class="col-md-4">
 	    	<div class="form-group">
 				<label>Product</label>
@@ -37,6 +16,33 @@
 				</div>
 			</div> 
     	</div>
+    	<div class="col-md-4">
+	    	 <div class="form-group">
+                    <label class="control-label" for="startDate">Start Date</label>
+                    <div class="controls">
+                       <p class="input-group">
+                          <input type="text" id="startDate" class="form-control" placeholder="dd-MMMM-yyyy" data-ng-model="startDate" datepicker-popup="dd-MMMM-yyyy" is-open="openedStartDate" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary"  ng-click="openStartDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                        </p>
+                    </div>
+              </div>
+		</div> 
+		
+		<div class="col-md-4">
+	    	 <div class="form-group">
+                    <label class="control-label" for="endDate">End Date</label>
+                    <div class="controls">
+                        <p class="input-group">
+                          <input type="text" id="endDate" class="form-control" placeholder="dd-MMMM-yyyy" data-ng-model="endDate" datepicker-popup="dd-MMMM-yyyy" is-open="openedEndDate" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary" ng-click="openEndtDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                        </p>
+                    </div>
+              </div>
+		</div> 
     </div>
   
   <div class="col-md-12 login-page-bg"> 

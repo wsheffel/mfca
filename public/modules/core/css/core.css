@@ -116,9 +116,11 @@ color: #FFFFFF;
 .forgotPwd{
 	padding: 16px;
 }
-/***
+
+/* 
+**
 *button
-***/
+**
 .btn {
   border-width: 1px;
   background-color: transparent;
@@ -150,9 +152,9 @@ color: #FFFFFF;
   color: white;
 }
 
-/***
+**
 *button - default
-***/
+**
 .btn-default {
   border-color: #BDC3C7;
   color: #ff3b30;
@@ -183,9 +185,9 @@ color: #FFFFFF;
   border-top-color: #BDC3C7;
 }
 
-/***
+**
 *button - primary
-***/
+**
 .btn-primary {
   border-color: #2980B9;
   color: #3498DB;
@@ -216,9 +218,9 @@ color: #FFFFFF;
   border-top-color: #3498DB;
 }
 
-/***
+**
 *button - success
-***/
+**
 .btn-success {
   border-color: #27AE60;
   color: #27AE60;
@@ -249,9 +251,9 @@ color: #FFFFFF;
   border-top-color: #27AE60;
 }
 
-/***
+**
 *button - info
-***/
+**
 .btn-info {
   border-color: #16A085;
   color: #16A085;
@@ -281,9 +283,9 @@ color: #FFFFFF;
 .btn-info .caret {
   border-top-color: #16A085;
 }
-/***
+**
 *button - warning
-***/
+**
 .btn-warning {
   border-color: #ec5e00;
   color: #ec5e00;
@@ -315,9 +317,9 @@ color: #FFFFFF;
 }
 
 
-/***
+**
 *button - primary
-***/
+**
 .btn-primary {
   border-color: #2980B9;
   color: #3498DB;
@@ -348,9 +350,9 @@ color: #FFFFFF;
   border-top-color: #3498DB;
 }
 
-/***
+**
 *button - success
-***/
+**
 .btn-success {
   border-color: #27AE60;
   color: #27AE60;
@@ -381,9 +383,9 @@ color: #FFFFFF;
   border-top-color: #27AE60;
 }
 
-/***
+**
 *button - info
-***/
+**
 .btn-info {
   border-color: #16A085;
   color: #16A085;
@@ -413,9 +415,9 @@ color: #FFFFFF;
 .btn-info .caret {
   border-top-color: #16A085;
 }
-/***
+**
 *button - warning
-***/
+**
 .btn-warning {
   border-color: #ec5e00;
   color: #ec5e00;
@@ -447,9 +449,9 @@ color: #FFFFFF;
 }
 
 
-/***
+**
 *button - danger
-***/
+**
 .btn-danger {
   border-color: #c0392b;
   color: #ff3b30;
@@ -478,4 +480,4 @@ color: #FFFFFF;
 }
 .btn-danger .caret {
   border-top-color: #ff3b30;
-}
+} */
