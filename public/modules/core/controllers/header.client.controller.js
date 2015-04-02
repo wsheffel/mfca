@@ -7,7 +7,7 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 		$scope.menu = Menus.getMenu('topbar');
 
 		$scope.init = function(){
-			var adminRole = $scope.authentication.user.roles[0];
+			var adminRole = $scope.authentication.user.role;
 			if(!_.isEqual(adminRole, 'admin')){
 				$scope.menu.items = _.filter($scope.menu.items, function(item) { return item.title !== "Industry"; });
 			}		

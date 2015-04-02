@@ -68,7 +68,15 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 		};
 
 		$scope.find = function() {
-			$scope.articles = Articles.query();
+			 /*if($scope.authentication.user.role === 'company'){
+				 Articles.query().$promise.then(function(response){
+					  $scope.articles = _.where(response, { 'username': $scope.authentication.user.username});
+				  });
+				}else{
+					$scope.articles = Articles.query();
+				}*/
+			 $scope.articles = Articles.query(); 
+			
 		};
 
 		$scope.findOne = function() {

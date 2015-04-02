@@ -21,6 +21,10 @@ angular.module('users').config(['$stateProvider',
 			url: '/signup',
 			templateUrl: 'modules/users/views/authentication/signup.client.view.html'
 		}).
+		state('admin', {
+			url: '/admin',
+			templateUrl: 'modules/users/views/authentication/admin.client.view.html'
+		}).
 		state('signin', {
 			url: '/signin',
 			templateUrl: 'modules/users/views/authentication/signin.client.view.html'
