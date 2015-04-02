@@ -1,13 +1,13 @@
 <section data-ng-controller="ArticlesController" data-ng-init="find()">
-	<div class="page-header">
+	<div class="page-header" data-ng-if="authentication.user.role==='admin'">
 		<h1>List of Company</h1>
 	</div>
-	<div class="row">
+	<div class="row" data-ng-if="authentication.user.role==='admin'">
 		<div class="col-xs-12 col-md-8">
 			<div class="input-group input-group-md">
 				<input type="text" placeholder="Search......" class="form-control" ng-model="searchCompany" style="height: 38px;">
 				<span class="input-group-btn">
-					<button class="btn btn-danger btn-show" type"button"> 
+					<button class="btn btn-danger btn-show" type="button"> 
 <i class="glyphicon glyphicon-search"></i> 
 						</button>
 				</span>
@@ -17,7 +17,7 @@
 	<br><br>
 	<div class="list-group">
 		<div class="row">
-			<div class="col-sm-4" style="padding: 10px;" ng-show="!searchCompany">
+			<div class="col-sm-4" style="padding: 10px;" ng-hide="addNewItem" ng-show="!searchCompany">
 				<a data-ng-href="/#!/articles/create" class="list-group-item">
 					<h4 class="cust-bg-icon text-center"><i class="glyphicon glyphicon-plus"></i></h4>
 					<div class="row">

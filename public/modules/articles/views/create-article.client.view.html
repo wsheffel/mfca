@@ -7,69 +7,60 @@
 			<strong data-ng-bind="error"></strong>
 		</div>
 		<div class="row">
-		
-			<div class="col-md-4">
-				<form name="articleForm" class="form-horizontal forgotPwd" data-ng-submit="create()" novalidate>
-					<fieldset>
-						<div class="form-group">
-                             <label class="control-label" for="listofindustries">List of Industries</label>
-                             <div class="controls">
-	                             <select name="listofindustries" class="form-control" data-ng-model="list_of_industries" id="listofindustries" class="form-control" ng-select="" ng-change="bindIndustry(list_of_industries);"  data-ng-options="industry._id as industry.industry_name for industry in industries">
-	                             	<option value="">-- select industry --</option>
-	                             </select>
-                             </div>
-                         </div>
-						<!-- <div class="form-group" ng-class="{ 'has-error': articleForm.title.$dirty && articleForm.title.$invalid }">
-							<label class="control-label" for="listofindustries">List of Industries</label>
-							<div class="controls">
-								<input name="listofindustries" type="text" data-ng-model="list_of_industries" id="listofindustries" class="form-control" placeholder="list of industries" required>
-							</div>
-						</div> -->
-						<div class="form-group">
-							<label class="control-label" for="companyname">Company Name</label>
-							<div class="controls">
-								<input name="companyname" type="text" data-ng-model="company_name" id="companyname" class="form-control" placeholder="company name" required>
-							</div>
+			<form name="articleForm" class="form-horizontal forgotPwd" data-ng-submit="create()" novalidate>
+				<fieldset>
+					<div class="col-md-6">
+						<div class="col-md-10">				
+							
+									
+									<div class="form-group">
+			                             <label class="control-label" for="listofindustries">List of Industries</label>
+			                             <div class="controls">
+				                             <select name="listofindustries" class="form-control" data-ng-model="list_of_industries" id="listofindustries" class="form-control" ng-select="" ng-change="bindIndustry(list_of_industries);"  data-ng-options="industry._id as industry.industry_name for industry in industries">
+				                             	<option value="">-- select industry --</option>
+				                             </select>
+			                             </div>
+			                         </div>
+									<div class="form-group">
+										<label class="control-label" for="companyname">Company Name</label>
+										<div class="controls">
+											<input name="companyname" type="text" data-ng-model="company_name" id="companyname" class="form-control" placeholder="company name" required>
+										</div>
+									</div>
+									
+									<div class="form-group">
+									<label class="control-label" for="city">City</label>
+									<div class="controls">
+										<input name="city" type="text" data-ng-model="city" id="city" class="form-control" placeholder="city" required>
+									</div>
+								</div>					
+								
 						</div>
-						<div class="form-group">
-							<label class="control-label" for="address">Address</label>
-							<div class="controls">
-								<input name="address" type="text" data-ng-model="address" id="address" class="form-control" placeholder="address" required>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label" for="city">City</label>
-							<div class="controls">
-								<input name="city" type="text" data-ng-model="city" id="city" class="form-control" placeholder="city" required>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label" for="country">Country</label>
-							<div class="controls">
-								<input name="country" type="text" data-ng-model="country" id="country" class="form-control" placeholder="country" required>
-							</div>
-						</div>
-						<!-- <div class="form-group">
-							<label class="control-label" for="country">Industry</label>
-							<div class="controls">
-								<input name="industry" ng-disabled="isIndustry" type="text" data-ng-model="industry" id="industry" class="form-control" placeholder="industry" required>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label" for="type_of_product">Type of Product</label>
-							<div class="controls">
-								<input name="type_of_product" type="text" data-ng-model="type_of_product" id="type_of_product" class="form-control" placeholder="type of product" required>
-							</div>
-						</div> -->
-						<div class="form-group">
-							<input type="submit" class="btn btn-sm btn-success btn-show m-t-n-xs">
-						</div>						
-					</fieldset>
-				</form>
-			</div>
-			<div class="col-md-6">
-				
-			</div>
+					</div>
+					<div class="col-md-6">
+						<div class="col-md-10">
+								<div class="form-group">
+										<label class="control-label" for="address">Address</label>
+										<div class="controls">
+											<textarea name="address" rows="5" type="text" data-ng-model="address" id="address" class="form-control" placeholder="address" required>
+											</textarea>
+										</div>
+									</div>
+									
+								
+								<div class="form-group">
+									<label class="control-label" for="country">Country</label>
+									<div class="controls">
+										<input name="country" type="text" data-ng-model="country" id="country" class="form-control" placeholder="country" required>
+									</div>
+								</div>
+								<div class="form-group">
+									<input type="submit" class="btn btn-sm btn-success btn-show m-t-n-xs">
+								</div>	
+						</div>				
+					</div>
+			</fieldset>
+		</form>			
 		</div>
 		
 	</div>

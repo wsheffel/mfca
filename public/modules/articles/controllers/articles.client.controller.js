@@ -6,6 +6,8 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 		
 		$scope.isIndustry = false;
 		
+		$scope.addNewItem = false;
+		
 		$scope.industries = Industry.query();
 		
 		//console.log('industries....'+angular.toJson($scope.industries));
@@ -21,8 +23,8 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 				address: this.address,
 				city: this.city,
 				country: this.country,
-				industry: this.industry //_.assign(this.industry[0]),
-				//type_of_product: this.type_of_product
+				industry: this.industry/*,
+				userid: $scope.authentication.user._id*/
 
 			});
 			article.$save(function(response) {
@@ -68,15 +70,18 @@ angular.module('articles').controller('ArticlesController', ['$scope', '$statePa
 		};
 
 		$scope.find = function() {
-			 /*if($scope.authentication.user.role === 'company'){
+			 if($scope.authentication.user.role === 'company'){
 				 Articles.query().$promise.then(function(response){
-					  $scope.articles = _.where(response, { 'username': $scope.authentication.user.username});
+					  $scope.articles = _.where(response, { 'user': {'_id' : $scope.authentication.user._id}});
+					  var test  = _.isEmpty($scope.articles);
+					  if(!_.isEmpty($scope.articles)){
+						  $scope.addNewItem = true;
+					  }
 				  });
+				 
 				}else{
 					$scope.articles = Articles.query();
-				}*/
-			 $scope.articles = Articles.query(); 
-			
+				}
 		};
 
 		$scope.findOne = function() {
