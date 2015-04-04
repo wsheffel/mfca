@@ -167,6 +167,81 @@ angular.module('systemcosts').controller('SystemcostsController',
 			$scope.success = '';
 			$scope.error = '';
 		};
+		
+		//gRID 
+		$scope.approved = function(val){			  	
+			  $location.path('systemcosts/product_type/'+val);		  	
+	      };
+	      
+		$scope.gridOptions = {
+				enableFiltering: true,
+				enableGridMenu: true,
+				showGridFooter: true,
+				showColumnFooter: true,
+			    columnDefs: [
+                  { name:'product_name', width:150 , enableSorting: false, enableColumnMenu: false, displayName: 'View Information', visible:true, enableFiltering :false, cellTemplate: '<button class="btn btn-info btn-xs" style="margin-left:20px;" ng-click="grid.appScope.approved(COL_FIELD)"><span class="h4-circle-active">View	Profile <i class="glyphicon glyphicon-user"></i></span></button>' },
+			      { field: 'product_name', displayName: 'Product Name', width:150, enableCellEdit: true, cellTemplate: '<div class="ui-grid-cell-contents"><span>{{COL_FIELD}}</span></div>' },
+			      { field: 'startDate',width:150,	 cellFilter: "date:'yyyy-MM-dd'" },
+			      { field: 'endDate',width:150, cellFilter: "date:'yyyy-MM-dd'"},
+			      /*{ field: 'total_percentage',width:150, cellFilter: "number:2", cellTemplate: '<div class="ui-grid-cell-contents"><span>{{COL_FIELD * 100  | number:0}}</span></div>'},*/
+			      { field: 'total_input_cost',width:150},
+			      { field: 'total_inputQuantity',width:150},
+			      { field: 'total_ProdCost',width:150},
+			      { field: 'total_ProdQuantity',width:150},
+			      { field: 'total_LossCost',width:150},
+			      { field: 'total_LossQuantity',width:150}
+			      
+			      /*,
+			      { field: 'startDate', cellFilter: 'mapGender', exporterPdfAlign: 'right' },
+			      { field: 'endDate', visible: false }*/
+			    ],
+			    exporterLinkLabel: 'get your csv here',
+			    exporterPdfDefaultStyle: {fontSize: 9},
+			    exporterPdfTableStyle: {margin: [30, 30, 30, 30]},
+			    exporterPdfTableHeaderStyle: {fontSize: 10, bold: true, italics: true, color: 'red'},
+			    exporterPdfOrientation: 'portrait',
+			    exporterPdfPageSize: 'LETTER',
+			    exporterPdfMaxGridWidth: 500,
+			    /*exporterHeaderFilter: function( displayName ) { 
+			      if( displayName === 'Name' ) { 
+			        return 'Person Name'; 
+			      } else { 
+			        return displayName;
+			      } 
+			    },
+			    exporterFieldCallback: function( grid, row, col, input ) {
+			      if( col.name == 'gender' ){
+			        switch( input ){
+			          case 1:
+			            return 'female';
+			            break;
+			          case 2:
+			            return 'male';
+			            break;
+			          default:
+			            return 'unknown';
+			            break;
+			        }
+			      } else {
+			        return input;
+			      }
+			    },*/
+			    onRegisterApi: function(gridApi){ 
+			      $scope.gridApi = gridApi;
+			    }
+			  };
+			  
+		
+			  $scope.export = function(){
+			    if ($scope.export_format == 'csv') {
+			      var myElement = angular.element(document.querySelectorAll(".custom-csv-link-location"));
+			      $scope.gridApi.exporter.csvExport( $scope.export_row_type, $scope.export_column_type, myElement );
+			    } else if ($scope.export_format == 'pdf') {
+			      $scope.gridApi.exporter.pdfExport( $scope.export_row_type, $scope.export_column_type );
+			    };
+			  };
+			 
+			  
 		// Toggle Input / Output panel
 		$scope.toggleInOut = function(isActive){
 			if(_.isEqual(isActive, false)){
@@ -339,10 +414,19 @@ angular.module('systemcosts').controller('SystemcostsController',
 
 		// Find a list of Systemcosts
 		$scope.find = function() {
-			//$scope.systemcosts = Systemcosts.query();
-			Systemcosts.query().$promise.then(function(response){
+			
+			/*Systemcosts.query().$promise.then(function(response){
                  $scope.systemcost = _.groupBy(response, 'product_name');
-             });
+             });*/
+			
+			Systemcosts.query().$promise.then(function(response){
+				if($scope.authentication.user.role === 'company'){
+					$scope.gridOptions.data = _.where(response, { 'user': {'_id':$scope.authentication.user._id}});
+				}else{
+					$scope.gridOptions.data = response;
+				}
+			});
+			
 		};
 
 		// Find existing Systemcost

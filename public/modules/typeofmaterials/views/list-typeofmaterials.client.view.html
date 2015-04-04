@@ -2,7 +2,7 @@
     <div class="page-header">
         <h2><strong>List</strong> of Material</h2><p><i>input / output
     </i></p>
-    <div class="row">
+  <!--   <div class="row">
         <div class="col-xs-12 col-md-8">
             <div class="input-group input-group-md">
                 <input type="text" placeholder="Search......" class="form-control" ng-model="searchType" style="height: 38px;">
@@ -13,26 +13,41 @@
                 </span>
             </div>
         </div>
-    </div>
+    </div> -->
     </div>
     
     <div class="list-group">
-        <a data-ng-repeat="(key, value) in typeofmaterials | filter:searchType" data-ng-href="#!/typeofmaterials/product_type/{{key}}" class="list-group-item">
-	<!-- 		<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="typeofmaterial.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="typeofmaterial.user.displayName"></span>
-			</small> -->
+    
+      <label>Which columns should we export?</label>
+      <select ng-model="export_column_type">
+        <option value='all'>All</option>
+        <option value='visible'>Visible</option>
+      </select>
+      <label>Which rows should we export?</label>
+      <select ng-model="export_row_type">
+        <option value='all'>All</option>
+        <option value='visible'>Visible</option>
+        <option value='selected'>Selected</option>
+      </select>
+      <label>What format would you like?</label>
+      <select ng-model="export_format">
+        <option value='csv'>CSV</option>
+        <option value='pdf'>PDF</option>
+      </select>
+      <button ng-click="export()">Export</button>
+      <div class="custom-csv-link-location">
+        <span class="ui-grid-exporter-csv-link">&nbsp</span>
+      </div> 
+      
+      <div ui-grid="gridOptions" ui-grid-selection ui-grid-exporter class="grid"></div>
+      
+       <!--  <a data-ng-repeat="(key, value) in typeofmaterials | filter:searchType" data-ng-href="#!/typeofmaterials/product_type/{{key}}" class="list-group-item">
             <div class="row">
                 <div class="col-md-3">
                     <h4 class="list-group-item-heading" data-ng-bind="key"></h4>
                 </div>
-               <!--  <div class="col-md-1">
-                    {{typeofmaterial.total_percentage * 100 | number:0}} %
-                </div> -->
             </div>
-        </a>
+        </a> -->
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!typeofmaterials.$resolved || typeofmaterials.length">
     	No Typeofmaterials yet, why don't you <a href="/#!/typeofmaterials/create">create one</a>?
