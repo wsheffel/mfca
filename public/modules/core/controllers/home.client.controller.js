@@ -8,7 +8,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 		
 		
 
-		var productPercentage   = dc.pieChart("#Product-Percentage"),    
+		/*var productPercentage   = dc.pieChart("#Product-Percentage"),    
 		    inputCost = dc.barChart("#InputCost"),
 		    outputCost = dc.barChart("#OutputCost");
 
@@ -131,7 +131,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 	        .ordinalColors(["#4CAF50","#E91E63","#9C27B0","#F44336","#00BCD4","#8BC34A","#4CAF50","#FFEB3B","#FF5722","#FFC107"]);
 	  
 	  
-	    dc.renderAll();
+	    dc.renderAll();*/
 	    
 	    
 	}
