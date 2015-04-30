@@ -2,7 +2,8 @@
 	<div class="page-header">
 		<h1 data-ng-bind="industry.title"></h1>
 	</div>
-	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == industry.user._id))">
+	
+	<div class="pull-right" data-ng-show="authentication.user.role == 'admin'">
 		<a class="btn btn-primary btn-show" href="/#!/industry/{{industry._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
