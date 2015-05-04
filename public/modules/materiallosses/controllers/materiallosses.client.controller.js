@@ -398,9 +398,18 @@ angular.module('materiallosses').controller('MateriallossesController',
 					}
 				}
 			} else {
-				$scope.materialloss.$remove(function() {
+				/*$scope.materialloss.$remove(function() {
 					$location.path('materiallosses');
-				});
+				});*/
+				
+				_.forEach($scope.materialloss, function (saveObj){
+					var materiallossObj = saveObj;
+					materiallossObj.$remove(function() {
+						
+					});
+				});				
+				$location.path('materiallosses');	
+				
 			}
 		};
 

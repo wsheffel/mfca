@@ -393,9 +393,17 @@ angular.module('energycosts').controller('EnergycostsController',
 					}
 				}
 			} else {
-				$scope.energycost.$remove(function() {
+				/*$scope.energycost.$remove(function() {
 					$location.path('energycosts');
-				});
+				});*/
+				
+				_.forEach($scope.energycosts, function (saveObj){
+					var energycostsObj = saveObj;
+					energycostsObj.$remove(function() {
+						
+					});
+				});				
+				$location.path('energycosts');	
 			}
 		};
 

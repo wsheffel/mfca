@@ -43,7 +43,7 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 		$scope.product_name = "";
 		$scope.company = {};
 		$scope.products = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
-
+		
 		
 		/*Date control using for tracking product items*/
 		/*Start*/
@@ -346,7 +346,7 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 				
 			}
 		};
-
+		
 		// Remove existing Typeofmaterial
 		$scope.remove = function(typeofmaterial) {
 			if ( typeofmaterial ) { 
@@ -358,9 +358,13 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 					}
 				}
 			} else {
-				$scope.typeofmaterial.$remove(function() {
-					$location.path('typeofmaterials');
-				});
+				_.forEach($scope.typeofmaterial, function (saveObj){
+					var typeofmaterialObj = saveObj;
+					typeofmaterialObj.$remove(function() {
+						
+					});
+				});				
+				$location.path('typeofmaterials');				
 			}
 		};
 

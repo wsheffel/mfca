@@ -395,9 +395,18 @@ angular.module('systemcosts').controller('SystemcostsController',
 					}
 				}
 			} else {
-				$scope.systemcost.$remove(function() {
+				/*$scope.systemcost.$remove(function() {
 					$location.path('systemcosts');
-				});
+				});*/
+				
+				_.forEach($scope.systemcost, function (saveObj){
+					var systemcostObj = saveObj;
+					systemcostObj.$remove(function() {
+						
+					});
+				});				
+				$location.path('systemcosts');	
+				
 			}
 		};
 
