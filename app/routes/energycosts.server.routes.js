@@ -11,8 +11,8 @@ module.exports = function(app) {
 
 	app.route('/energycosts/:energycostId')
 		.get(energycosts.read)
-		.put(users.requiresLogin, energycosts.hasAuthorization, energycosts.update)
-		.delete(users.requiresLogin, energycosts.hasAuthorization, energycosts.delete);
+		.put(users.requiresLogin, energycosts.update)
+		.delete(users.requiresLogin, energycosts.delete);
 
 	// Finish by binding the Energycost middleware
 	app.param('energycostId', energycosts.energycostByID);

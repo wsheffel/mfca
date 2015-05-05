@@ -44,6 +44,10 @@ angular.module('materiallosses').controller('MateriallossesController',
         $scope.company = {};
 		$scope.products = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Dakota','North Carolina','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
 
+		//isEdit for materiallosses items
+		$scope.isEditItems = false;
+		$scope.isLoadItems = false;
+		
 		/*Date control using for tracking product items*/
 		/*Start*/
 		
@@ -84,6 +88,12 @@ angular.module('materiallosses').controller('MateriallossesController',
         	});
 		};		
 		$scope.loadItems = function(){
+			
+			if(_.isEmpty($scope.list_of_materials) && $scope.isEditItems === true){
+				$scope.list_of_materials = $scope.materialloss;
+				$scope.isLoadItems = true;
+			}
+			
 			//Total input quantity
 			var total_arrinputQuantity = _.flatten($scope.list_of_materials, 'input_quantity');
 			$scope.sumItems(total_arrinputQuantity);
@@ -390,6 +400,12 @@ angular.module('materiallosses').controller('MateriallossesController',
 			});
 		};*/
 
+        // Edit Items for materiallosses
+		$scope.editItems = function(){
+			$scope.isEditItems = true;
+		};
+		
+		
 		// Remove existing Materialloss
 		$scope.remove = function(materialloss) {
 			if ( materialloss ) { 
@@ -418,13 +434,44 @@ angular.module('materiallosses').controller('MateriallossesController',
 
 		// Update existing Materialloss
 		$scope.update = function() {
-			var materialloss = $scope.materialloss;
+			if(!_.isUndefined($scope.materialloss) &&
+					_.size($scope.materialloss) > 0){				
+				_.forEach($scope.materialloss, function (saveObj){
+					
+					saveObj.input_price = parseInt(saveObj.input_price);
+					saveObj.input_quantity = parseInt(saveObj.input_quantity);
+					saveObj.input_cost = parseInt(saveObj.input_cost);
+					saveObj.output_pamt_quantity = parseInt(saveObj.input_quantity);
+					saveObj.output_pamt_cost = parseInt(saveObj.input_cost);
+					saveObj.output_lamt_quantity = parseInt(saveObj.output_lamt_quantity);
+					saveObj.output_lamt_cost = parseInt(saveObj.output_lamt_cost);
+					
+					saveObj.total_inputQuantity = $scope.total_inputQuantity;
+					saveObj.total_input_cost = $scope.total_input_cost;
+					saveObj.total_ProdQuantity = $scope.total_ProdQuantity;
+					saveObj.total_ProdCost = $scope.total_ProdCost;
+					saveObj.total_LossQuantity = $scope.total_LossQuantity;
+					saveObj.total_LossCost = $scope.total_LossCost;
+					saveObj.total_percentage = $scope.total_percentage;
+					
+					saveObj.$update(function() {
+						
+					}, function(errorResponse) {
+						$scope.error = errorResponse.data.message;
+					});
+					
+				});
+				
+				$location.path('materiallosses');	
+			}
+			
+			/*var materialloss = $scope.materialloss;
 
 			materialloss.$update(function() {
 				$location.path('materiallosses/' + materialloss._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
-			});
+			});*/
 		};
 
 		// Find a list of Materiallosses

@@ -11,8 +11,8 @@ module.exports = function(app) {
 
 	app.route('/systemcosts/:systemcostId')
 		.get(systemcosts.read)
-		.put(users.requiresLogin, systemcosts.hasAuthorization, systemcosts.update)
-		.delete(users.requiresLogin, systemcosts.hasAuthorization, systemcosts.delete);
+		.put(users.requiresLogin, systemcosts.update)
+		.delete(users.requiresLogin, systemcosts.delete);
 
 	// Finish by binding the Systemcost middleware
 	app.param('systemcostId', systemcosts.systemcostByID);

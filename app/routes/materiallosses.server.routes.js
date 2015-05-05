@@ -11,8 +11,8 @@ module.exports = function(app) {
 
 	app.route('/materiallosses/:materiallossId')
 		.get(materiallosses.read)
-		.put(users.requiresLogin, materiallosses.hasAuthorization, materiallosses.update)
-		.delete(users.requiresLogin, materiallosses.hasAuthorization, materiallosses.delete);
+		.put(users.requiresLogin, materiallosses.update)
+		.delete(users.requiresLogin, materiallosses.delete);
 
 	// Finish by binding the Materialloss middleware
 	app.param('materiallossId', materiallosses.materiallossByID);

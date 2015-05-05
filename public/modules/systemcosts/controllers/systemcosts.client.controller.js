@@ -45,6 +45,11 @@ angular.module('systemcosts').controller('SystemcostsController',
         $scope.company = {};
 		$scope.products = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
 
+		
+		//isEdit for Systemcost items
+		$scope.isEditItems = false;
+		$scope.isLoadItems = false;
+		
 		/*Date control using for tracking product items*/
 		/*Start*/
 		
@@ -84,6 +89,12 @@ angular.module('systemcosts').controller('SystemcostsController',
         	});
 		};		
 		$scope.loadItems = function(){
+			
+			if(_.isEmpty($scope.list_of_materials) && $scope.isEditItems === true){
+				$scope.list_of_materials = $scope.systemcost;
+				$scope.isLoadItems = true;
+			}
+			
 			//Total input quantity
 			var total_arrinputQuantity = _.flatten($scope.list_of_materials, 'input_quantity');
 			$scope.sumItems(total_arrinputQuantity);
@@ -387,6 +398,11 @@ angular.module('systemcosts').controller('SystemcostsController',
 			});
 		};*/
 
+       // Edit Items for Systemcost
+		$scope.editItems = function(){
+			$scope.isEditItems = true;
+		};
+		
 		// Remove existing Systemcost
 		$scope.remove = function(systemcost) {
 			if ( systemcost ) { 
@@ -415,13 +431,45 @@ angular.module('systemcosts').controller('SystemcostsController',
 
 		// Update existing Systemcost
 		$scope.update = function() {
-			var systemcost = $scope.systemcost;
+			
+			if(!_.isUndefined($scope.systemcost) &&
+					_.size($scope.systemcost) > 0){				
+				_.forEach($scope.systemcost, function (saveObj){
+					
+					saveObj.input_price = parseInt(saveObj.input_price);
+					saveObj.input_quantity = parseInt(saveObj.input_quantity);
+					saveObj.input_cost = parseInt(saveObj.input_cost);
+					saveObj.output_pamt_quantity = parseInt(saveObj.input_quantity);
+					saveObj.output_pamt_cost = parseInt(saveObj.input_cost);
+					saveObj.output_lamt_quantity = parseInt(saveObj.output_lamt_quantity);
+					saveObj.output_lamt_cost = parseInt(saveObj.output_lamt_cost);
+					
+					saveObj.total_inputQuantity = $scope.total_inputQuantity;
+					saveObj.total_input_cost = $scope.total_input_cost;
+					saveObj.total_ProdQuantity = $scope.total_ProdQuantity;
+					saveObj.total_ProdCost = $scope.total_ProdCost;
+					saveObj.total_LossQuantity = $scope.total_LossQuantity;
+					saveObj.total_LossCost = $scope.total_LossCost;
+					saveObj.total_percentage = $scope.total_percentage;
+					
+					saveObj.$update(function() {
+						
+					}, function(errorResponse) {
+						$scope.error = errorResponse.data.message;
+					});
+					
+				});
+				
+				$location.path('systemcosts');	
+			}
+			
+			/*var systemcost = $scope.systemcost;
 
 			systemcost.$update(function() {
 				$location.path('systemcosts/' + systemcost._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
-			});
+			});*/
 		};
 
 		// Find a list of Systemcosts

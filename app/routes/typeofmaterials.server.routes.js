@@ -11,8 +11,8 @@ module.exports = function(app) {
 
 	app.route('/typeofmaterials/:typeofmaterialId')
 		.get(typeofmaterials.read)
-		.put(users.requiresLogin, typeofmaterials.hasAuthorization, typeofmaterials.update)
-		.delete(users.requiresLogin, typeofmaterials.hasAuthorization, typeofmaterials.delete);
+		.put(users.requiresLogin, typeofmaterials.update)
+		.delete(users.requiresLogin, typeofmaterials.delete);
 
 	// Finish by binding the Typeofmaterial middleware
 	app.param('typeofmaterialId', typeofmaterials.typeofmaterialByID);
