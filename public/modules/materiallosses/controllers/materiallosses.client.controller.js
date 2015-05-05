@@ -2,8 +2,8 @@
 
 // Materiallosses controller
 angular.module('materiallosses').controller('MateriallossesController', 
-		['$scope', '$stateParams', '$location', 'Authentication', 'Materiallosses', '_', 'Articles',
-	function($scope, $stateParams, $location, Authentication, Materiallosses, _, Articles) {
+		['$scope', '$stateParams', '$location', 'Authentication', 'Materiallosses', '_', 'Articles', '$filter',
+	function($scope, $stateParams, $location, Authentication, Materiallosses, _, Articles, $filter) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsedIn = true;
 		$scope.isInput='-active';
@@ -173,6 +173,8 @@ angular.module('materiallosses').controller('MateriallossesController',
 		$scope.approved = function(val){			  	
 			  $location.path('materiallosses/product_type/'+val);		  	
 	      };
+	    
+	    $scope.getDatetime = new Date;
 	      
 		$scope.gridOptions = {
 				enableFiltering: true,
@@ -203,6 +205,7 @@ angular.module('materiallosses').controller('MateriallossesController',
 			    exporterPdfOrientation: 'landscape',
 			    exporterPdfPageSize: 'LETTER',
 			    exporterPdfMaxGridWidth: 500,
+			    exporterCsvFilename: 'material-loss-'+$filter('date')($scope.getDatetime, "yyyy-MM-dd")+'.csv',
 			    /*exporterHeaderFilter: function( displayName ) { 
 			      if( displayName === 'Name' ) { 
 			        return 'Person Name'; 

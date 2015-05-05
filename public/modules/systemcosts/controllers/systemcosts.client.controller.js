@@ -2,8 +2,8 @@
 
 // Systemcosts controller
 angular.module('systemcosts').controller('SystemcostsController', 
-		['$scope', '$stateParams', '$location', 'Authentication', 'Systemcosts', '_', 'Articles',
-	function($scope, $stateParams, $location, Authentication, Systemcosts, _, Articles) {
+		['$scope', '$stateParams', '$location', 'Authentication', 'Systemcosts', '_', 'Articles', '$filter',
+	function($scope, $stateParams, $location, Authentication, Systemcosts, _, Articles, $filter) {
 		
 		$scope.authentication = Authentication;
 		$scope.isCollapsedIn = true;
@@ -173,6 +173,8 @@ angular.module('systemcosts').controller('SystemcostsController',
 			  $location.path('systemcosts/product_type/'+val);		  	
 	      };
 	      
+	    $scope.getDatetime = new Date;
+	      
 		$scope.gridOptions = {
 				enableFiltering: true,
 				enableGridMenu: true,
@@ -202,6 +204,7 @@ angular.module('systemcosts').controller('SystemcostsController',
 			    exporterPdfOrientation: 'landscape',
 			    exporterPdfPageSize: 'LETTER',
 			    exporterPdfMaxGridWidth: 500,
+			    exporterCsvFilename: 'system-cost-'+$filter('date')($scope.getDatetime, "yyyy-MM-dd")+'.csv',
 			    /*exporterHeaderFilter: function( displayName ) { 
 			      if( displayName === 'Name' ) { 
 			        return 'Person Name'; 

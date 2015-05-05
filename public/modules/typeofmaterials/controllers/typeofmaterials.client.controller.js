@@ -2,8 +2,8 @@
 
 // Typeofmaterials controller
 angular.module('typeofmaterials').controller('TypeofmaterialsController', 
-		['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Typeofmaterials', '_', 'Articles',
-	function($scope, $http, $stateParams, $location, Authentication, Typeofmaterials, _, Articles) {
+		['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Typeofmaterials', '_', 'Articles', '$filter',
+	function($scope, $http, $stateParams, $location, Authentication, Typeofmaterials, _, Articles, $filter) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsedIn = true;
 		$scope.isInput='-active';
@@ -177,6 +177,8 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 			  $location.path('typeofmaterials/product_type/'+val);		  	
 	      };
 	      
+	    $scope.getDatetime = new Date;  
+	  
 		$scope.gridOptions = {
 				enableFiltering: true,
 				enableGridMenu: true,
@@ -206,6 +208,7 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 			    exporterPdfOrientation: 'landscape',
 			    exporterPdfPageSize: 'LETTER',
 			    exporterPdfMaxGridWidth: 500,
+			    exporterCsvFilename: 'type-of-material-'+$filter('date')($scope.getDatetime, "yyyy-MM-dd")+'.csv',
 			    /*exporterHeaderFilter: function( displayName ) { 
 			      if( displayName === 'Name' ) { 
 			        return 'Person Name'; 

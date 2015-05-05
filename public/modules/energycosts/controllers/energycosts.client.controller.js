@@ -2,8 +2,8 @@
 
 // Energycosts controller
 angular.module('energycosts').controller('EnergycostsController', 
-		['$scope', '$stateParams', '$location', 'Authentication', 'Energycosts', '_', 'Articles',
-	function($scope, $stateParams, $location, Authentication, Energycosts, _, Articles) {
+		['$scope', '$stateParams', '$location', 'Authentication', 'Energycosts', '_', 'Articles', '$filter',
+	function($scope, $stateParams, $location, Authentication, Energycosts, _, Articles, $filter) {
 		$scope.authentication = Authentication;
 		$scope.isCollapsedIn = true;
 		$scope.isInput='-active';
@@ -171,6 +171,8 @@ angular.module('energycosts').controller('EnergycostsController',
 		$scope.approved = function(val){			  	
 			  $location.path('energycosts/product_type/'+val);		  	
 	      };
+	     
+	    $scope.getDatetime = new Date;
 	      
 		$scope.gridOptions = {
 				enableFiltering: true,
@@ -201,6 +203,7 @@ angular.module('energycosts').controller('EnergycostsController',
 			    exporterPdfOrientation: 'landscape',
 			    exporterPdfPageSize: 'LETTER',
 			    exporterPdfMaxGridWidth: 500,
+			    exporterCsvFilename: 'energy-cost-'+$filter('date')($scope.getDatetime, "yyyy-MM-dd")+'.csv',
 			    /*exporterHeaderFilter: function( displayName ) { 
 			      if( displayName === 'Name' ) { 
 			        return 'Person Name'; 
