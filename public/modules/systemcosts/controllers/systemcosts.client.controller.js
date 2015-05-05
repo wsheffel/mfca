@@ -199,7 +199,7 @@ angular.module('systemcosts').controller('SystemcostsController',
 			    exporterPdfDefaultStyle: {fontSize: 9},
 			    exporterPdfTableStyle: {margin: [30, 30, 30, 30]},
 			    exporterPdfTableHeaderStyle: {fontSize: 10, bold: true, italics: true, color: 'red'},
-			    exporterPdfOrientation: 'portrait',
+			    exporterPdfOrientation: 'landscape',
 			    exporterPdfPageSize: 'LETTER',
 			    exporterPdfMaxGridWidth: 500,
 			    /*exporterHeaderFilter: function( displayName ) { 
