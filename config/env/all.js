@@ -16,6 +16,7 @@ module.exports = {
 				'public/lib/bootstrap/dist/css/bootstrap.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
 				'public/vendor/dc/css/dc.css',
+				'public/vendor/c3/c3.min.css',
 			],
 			js: [
 				'public/lib/angular/angular.js',
@@ -46,6 +47,7 @@ module.exports = {
 			'public/vendor/pdfmake.js',
 			'public/vendor/vfs_fonts.js',	
 			'public/vendor/ui-grid-unstable.js',
+			'public/vendor/c3/c3.min.js',
 			'public/modules/*/*.js',
 			'public/modules/*/*[!tests]*/*.js'
 		],

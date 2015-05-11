@@ -484,6 +484,37 @@ angular.module('energycosts').controller('EnergycostsController',
 			
 		};
 
+		$scope.loadchart = function(tPercentage, productName){
+
+				/*console.log('--prod--'+ tPercentage, productName);*/
+				var chart = c3.generate({
+			    data: {
+			        type: 'bar',
+			        json: [
+			            { 'product': productName, 'Energy_Summary': tPercentage }
+			        ],
+			        keys: {
+			            x: 'product',
+			            value: ['Energy_Summary']
+			        }
+			    },
+			    axis: {
+			            x: {
+			                type: 'category',
+			                label: 'Product Name'
+			            },
+			            y: {
+				            label: 'Total Percentage %'
+				        }
+			    },
+			    bar: {
+			        width: {
+			            ratio: 0.5
+			        }
+			    }
+			});
+		};
+
 		// Find existing Energycost
 		$scope.findOne = function() {
 			/*$scope.energycost = Energycosts.get({ 
@@ -498,6 +529,9 @@ angular.module('energycosts').controller('EnergycostsController',
             } if(_.isEqual($stateParams.viewCurrentEnergycost, 'product_type')){
             	Energycosts.query().$promise.then(function(response){
                     $scope.energycost = _.filter(response, {'product_name' : $stateParams.energycostId});
+
+                    $scope.totalPercentage = $filter('number')(parseFloat($scope.energycost[0].total_percentage)*100, 0);
+					$scope.loadchart($scope.totalPercentage, $stateParams.energycostId);
                 });
             } else {
                 $scope.energycost = Energycosts.get({ 

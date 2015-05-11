@@ -489,6 +489,37 @@ angular.module('systemcosts').controller('SystemcostsController',
 			
 		};
 
+		$scope.loadchart = function(tPercentage, productName){
+
+				/*console.log('--prod--'+ tPercentage, productName);*/
+				var chart = c3.generate({
+			    data: {
+			        type: 'bar',
+			        json: [
+			            { 'product': productName, 'System_Summary': tPercentage }
+			        ],
+			        keys: {
+			            x: 'product',
+			            value: ['System_Summary']
+			        }
+			    },
+			    axis: {
+			            x: {
+			                type: 'category',
+			                label: 'Product Name'
+			            },
+			            y: {
+				            label: 'Total Percentage %'
+				        }
+			    },
+			    bar: {
+			        width: {
+			            ratio: 0.5
+			        }
+			    }
+			});
+		};
+
 		// Find existing Systemcost
 		$scope.findOne = function() {
 			/*$scope.systemcost = Systemcosts.get({ 
@@ -503,6 +534,9 @@ angular.module('systemcosts').controller('SystemcostsController',
             } if(_.isEqual($stateParams.viewCurrentSystemCost, 'product_type')){
             	Systemcosts.query().$promise.then(function(response){
                     $scope.systemcost = _.filter(response, {'product_name' : $stateParams.systemcostId});
+
+                    $scope.totalPercentage = $filter('number')(parseFloat($scope.systemcost[0].total_percentage)*100, 0);
+					$scope.loadchart($scope.totalPercentage, $stateParams.systemcostId);
                 });
             } else {
                 $scope.systemcost = Systemcosts.get({ 

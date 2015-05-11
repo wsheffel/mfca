@@ -491,6 +491,37 @@ angular.module('materiallosses').controller('MateriallossesController',
 	            
 		};
 
+		$scope.loadchart = function(tPercentage, productName){
+
+				/*console.log('--prod--'+ tPercentage, productName);*/
+				var chart = c3.generate({
+			    data: {
+			        type: 'bar',
+			        json: [
+			            { 'product': productName, 'Losses_Summary': tPercentage }
+			        ],
+			        keys: {
+			            x: 'product',
+			            value: ['Losses_Summary']
+			        }
+			    },
+			    axis: {
+			            x: {
+			                type: 'category',
+			                label: 'Product Name'
+			            },
+			            y: {
+				            label: 'Total Percentage %'
+				        }
+			    },
+			    bar: {
+			        width: {
+			            ratio: 0.5
+			        }
+			    }
+			});
+		};
+
 		// Find existing Materialloss
 		$scope.findOne = function() {
 			/*$scope.materialloss = Materiallosses.get({ 
@@ -504,7 +535,10 @@ angular.module('materiallosses').controller('MateriallossesController',
                 }));
             } if(_.isEqual($stateParams.viewCurrentMaterialloss, 'product_type')){
             	Materiallosses.query().$promise.then(function(response){
-                    $scope.materialloss = _.filter(response, {'product_name' : $stateParams.materiallossId});
+                    $scope.materialloss = _.filter(response, {'product_name' : $stateParams.materiallossId})
+
+                    $scope.totalPercentage = $filter('number')(parseFloat($scope.materialloss[0].total_percentage)*100, 0);
+					$scope.loadchart($scope.totalPercentage, $stateParams.materiallossId);
                 });
             } else {
                 $scope.materialloss = Materiallosses.get({ 

@@ -280,6 +280,8 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 			$scope.input_cost = 0;
 		};
 
+		
+
 		// Create new Typeofmaterial
 		$scope.create = function() {
 			var isSave = false;
@@ -444,8 +446,41 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 			
 		};
 
+		$scope.loadchart = function(tPercentage, productName){
+
+				/*console.log('--prod--'+ tPercentage, productName);*/
+				var chart = c3.generate({
+			    data: {
+			        type: 'bar',
+			        json: [
+			            { 'product': productName, 'Material_Summary': tPercentage }
+			        ],
+			        keys: {
+			            x: 'product',
+			            value: ['Material_Summary']
+			        }
+			    },
+			    axis: {
+			            x: {
+			                type: 'category',
+			                label: 'Product Name'
+			            },
+			            y: {
+				            label: 'Total Percentage %'
+				        }
+			    },
+			    bar: {
+			        width: {
+			            ratio: 0.5
+			        }
+			    }
+			});
+		};
+
 		// Find existing Typeofmaterial
 		$scope.findOne = function() {
+			
+
 			if(!_.isEqual($stateParams.typeofmaterialId, 'viewCurrent')){
 				$scope.typeofmaterial = [];
 				$scope.typeofmaterial.push(Typeofmaterials.get({ 
@@ -454,6 +489,12 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 			} if(_.isEqual($stateParams.viewCurrentTypeofmaterial, 'product_type')){
 				Typeofmaterials.query().$promise.then(function(response){
 					$scope.typeofmaterial = _.filter(response, {'product_name' : $stateParams.typeofmaterialId});
+					
+
+					$scope.totalPercentage = $filter('number')(parseFloat($scope.typeofmaterial[0].total_percentage)*100, 0);
+					$scope.loadchart($scope.totalPercentage, $stateParams.typeofmaterialId);
+					
+
 				});
 			} else {
 				$scope.typeofmaterial = Typeofmaterials.get({ 
@@ -461,6 +502,7 @@ angular.module('typeofmaterials').controller('TypeofmaterialsController',
 				});
 				
 			}
+
 		};
 		
 		// added by tech-works
